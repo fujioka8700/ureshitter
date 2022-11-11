@@ -1,13 +1,16 @@
 {
-  "extends": ["eslint:recommended"],
-  "plugins": [],
+  "extends": ["eslint:recommended", "plugin:vue/vue3-essential", "@vue/prettier"],
+  "plugins": ["vue"],
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": 2015
   },
-  "env": { "browser": true },
-  "globals": {},
+  "env": {
+    "browser": true,
+    "es6": true
+  },
   "rules": {
-    "semi": "error"
+    "semi": ["error", "always"],
+    "quotes": ["warn", "single"]
   }
 }
