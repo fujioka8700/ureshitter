@@ -4,6 +4,24 @@ import TheHeader from './components/TheHeader.vue';
 
 <template>
   <TheHeader />
+
+  <section>
+    <div class="container">
+      <form action="">
+        <div class="d-flex align-items-center pt-3">
+          <label for="name" class="text-nowrap">名前</label>
+          <input
+            type="text"
+            name="name"
+            class="form-control ms-1"
+            id="name"
+            placeholder="名前を記入してください"
+          />
+        </div>
+      </form>
+    </div>
+  </section>
+
   <!-- <section>
     <form>
       <div class="name">

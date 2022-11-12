@@ -7,7 +7,7 @@ import logo from '../../images/logo.svg';
     <div class="container">
       <div class="wrapper pt-3 pb-3 d-flex align-items-center">
         <img :src="logo" alt="Ureshitterのロゴ" />
-        <h1 class="c-header-logo">Ureshitter</h1>
+        <h1 class="c-header-logo ms-1">Ureshitter</h1>
       </div>
     </div>
   </header>
