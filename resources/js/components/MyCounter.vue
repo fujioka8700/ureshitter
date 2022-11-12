@@ -10,6 +10,7 @@ const addCount = () => {
 
 <template>
   <h2>Counter</h2>
+  <p>カウンターじゃないよ</p>
   <p>Count:{{ count }}</p>
   <button @click="addCount">Add</button>
 </template>
