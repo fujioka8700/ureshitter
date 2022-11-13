@@ -7,10 +7,17 @@ import VeryHappy from '../../images/very-happy.svg';
 <template>
   <section>
     <div class="container">
-      <form action="">
+      <form @submit.prevent="postEmotions()">
         <div class="d-flex align-items-center mt-3">
           <label for="Name" class="text-nowrap">名前</label>
-          <input type="text" name="name" class="form-control ms-1" id="Name" placeholder="名無し" />
+          <input
+            type="text"
+            name="name"
+            class="form-control ms-1"
+            id="Name"
+            placeholder="名無し"
+            v-model="name"
+          />
         </div>
         <!-- End of name input -->
 
@@ -55,6 +62,7 @@ import VeryHappy from '../../images/very-happy.svg';
             id="Textarea"
             rows="3"
             placeholder="10円拾ったよ"
+            v-model="message"
           ></textarea>
         </div>
         <!-- End of textarea -->
@@ -67,3 +75,19 @@ import VeryHappy from '../../images/very-happy.svg';
     </div>
   </section>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      name: '',
+      message: '',
+    };
+  },
+  methods: {
+    postEmotions() {
+      alert('投稿しました。');
+    },
+  },
+};
+</script>
