@@ -1,15 +1,13 @@
 <script setup>
-import Counter from "./components/Counter.vue";
-import logo from "../images/logo-with-shadow.png";
+import TheHeader from './components/TheHeader.vue';
+import EmotionForm from './components/EmotionForm.vue';
+import TheArticles from './components/TheArticles.vue';
 </script>
 
 <template>
-    <h1>Hello World</h1>
-    <img :src="logo" />
-    <img src="../images/logo-with-shadow.png" />
-    <Counter />
-    <p class="text-primary">Hello</p>
-    <button type="button" class="btn btn-primary">ボタン</button>
-    <button type="button" class="btn btn-primary rounded-pill">長丸ボタン</button>
-    <p class="text-success">Hello</p>
+  <TheHeader />
+  <EmotionForm />
+  <TheArticles />
 </template>
+
+<style lang="scss" scoped></style>
