@@ -21,31 +21,43 @@ import VeryHappy from '../../images/very-happy.svg';
         </div>
         <!-- End of name input -->
 
-        <div class="mt-3 d-flex justify-content-between">
-          <div class="card pt-1 pb-0 px-1">
+        <div class="emotion-wrap mt-3 d-flex justify-content-between">
+          <div
+            class="emotion-wrap--unit card pt-1 pb-0 px-1"
+            :class="{ 'border border-3 border-secondary': emotion === 1 }"
+            @click="chooseEmotion(1)"
+          >
             <img
               :src="LittleHappy"
-              alt="カードの画像"
+              alt="少しうれしい画像"
               class="card-img-top bg-secondary bg-opacity-25 rounded-1"
             />
             <div class="card-body p-0">
               <p class="card-text text-center">少しうれしい</p>
             </div>
           </div>
-          <div class="card pt-1 pb-0 px-1">
+          <div
+            class="emotion-wrap--unit card pt-1 pb-0 px-1"
+            :class="{ 'border border-3 border-secondary': emotion === 2 }"
+            @click="chooseEmotion(2)"
+          >
             <img
               :src="UsuallyHappy"
-              alt="カードの画像"
+              alt="うれしい画像"
               class="card-img-top bg-secondary bg-opacity-25 rounded-1"
             />
             <div class="card-body p-0 position-relative">
               <p class="card-text text-center">うれしい</p>
             </div>
           </div>
-          <div class="card pt-1 pb-0 px-1">
+          <div
+            class="emotion-wrap--unit card pt-1 pb-0 px-1"
+            :class="{ 'border border-3 border-secondary': emotion === 3 }"
+            @click="chooseEmotion(3)"
+          >
             <img
               :src="VeryHappy"
-              alt="カードの画像"
+              alt="すごくうれしい画像"
               class="card-img-top bg-secondary bg-opacity-25 rounded-1"
             />
             <div class="card-body p-0">
@@ -81,12 +93,16 @@ export default {
   data() {
     return {
       name: '',
+      emotion: 2,
       message: '',
     };
   },
   methods: {
     postEmotions() {
       alert('投稿しました。');
+    },
+    chooseEmotion(num) {
+      this.emotion = num;
     },
   },
 };
