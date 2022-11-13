@@ -1,15 +1,13 @@
 <script setup>
 import TheHeader from './components/TheHeader.vue';
 import EmotionForm from './components/EmotionForm.vue';
-
-import UsuallyHappy from '../images/usually-happy.svg';
+import TheArticles from './components/TheArticles.vue';
 </script>
 
 <template>
   <TheHeader />
   <EmotionForm />
-
-  <article>
-    <img :src="UsuallyHappy" alt="" />
-  </article>
+  <TheArticles />
 </template>
+
+<style lang="scss" scoped></style>
