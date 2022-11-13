@@ -5,7 +5,7 @@ import VeryHappy from '../../images/very-happy.svg';
 </script>
 
 <template>
-  <section>
+  <section class="c-emotion-section">
     <div class="container">
       <form @submit.prevent="postEmotions()">
         <div class="d-flex align-items-center mt-3">

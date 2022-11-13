@@ -1,7 +1,9 @@
-.c-article-item {
-  height: 100px;
+.c-article {
+  .article-item {
+    height: 100px;
+  }
 
-  .message {
+  .article-message {
     height: 70%;
   }
 }

@@ -3,13 +3,13 @@ import UsuallyHappy from '../../images/usually-happy.svg';
 </script>
 
 <template>
-  <article>
+  <article class="c-article">
     <div class="container">
-      <div class="c-article-item mt-3 d-flex">
+      <div class="article-item mt-3 d-flex">
         <img :src="UsuallyHappy" class="bg-secondary bg-opacity-25 rounded-1 me-2" alt="" />
         <div>
           <p class="mb-0">ななしさん</p>
-          <div class="message overflow-auto">
+          <div class="article-message overflow-auto">
             <p>
               サンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプル
               サンプルサンプルサンプルサンプルサンプルサンプルサンプルサンプル
