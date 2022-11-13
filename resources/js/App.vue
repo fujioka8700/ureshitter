@@ -1,5 +1,8 @@
 <script setup>
 import TheHeader from './components/TheHeader.vue';
+import LittleHappy from '../images/little-happy.svg';
+import UsuallyHappy from '../images/usually-happy.svg';
+import VeryHappy from '../images/very-happy.svg';
 </script>
 
 <template>
@@ -8,44 +11,62 @@ import TheHeader from './components/TheHeader.vue';
   <section>
     <div class="container">
       <form action="">
-        <div class="d-flex align-items-center pt-3">
-          <label for="name" class="text-nowrap">名前</label>
-          <input
-            type="text"
-            name="name"
-            class="form-control ms-1"
-            id="name"
-            placeholder="名前を記入してください"
-          />
+        <div class="d-flex align-items-center mt-3">
+          <label for="Name" class="text-nowrap">名前</label>
+          <input type="text" name="name" class="form-control ms-1" id="Name" placeholder="名無し" />
         </div>
+        <!-- End of name input -->
+
+        <div class="mt-3 d-flex justify-content-between">
+          <div class="card pt-1 pb-0 px-1">
+            <img
+              :src="LittleHappy"
+              alt="カードの画像"
+              class="card-img-top bg-secondary bg-opacity-25 rounded-1"
+            />
+            <div class="card-body p-0">
+              <p class="card-text text-center">少しうれしい</p>
+            </div>
+          </div>
+          <div class="card pt-1 pb-0 px-1">
+            <img
+              :src="UsuallyHappy"
+              alt="カードの画像"
+              class="card-img-top bg-secondary bg-opacity-25 rounded-1"
+            />
+            <div class="card-body p-0 position-relative">
+              <p class="card-text text-center">うれしい</p>
+            </div>
+          </div>
+          <div class="card pt-1 pb-0 px-1">
+            <img
+              :src="VeryHappy"
+              alt="カードの画像"
+              class="card-img-top bg-secondary bg-opacity-25 rounded-1"
+            />
+            <div class="card-body p-0">
+              <p class="card-text text-center">すごくうれしい</p>
+            </div>
+          </div>
+        </div>
+        <!-- End of happiness -->
+
+        <div class="mt-3">
+          <label for="Textarea" class="form-label">うれしかったこと</label>
+          <textarea
+            class="form-control"
+            id="Textarea"
+            rows="3"
+            placeholder="10円拾ったよ"
+          ></textarea>
+        </div>
+        <!-- End of textarea -->
+
+        <div class="mt-3 text-center border-bottom pb-3">
+          <button type="submit" class="btn btn-primary">投稿する</button>
+        </div>
+        <!-- End of submit button -->
       </form>
     </div>
   </section>
-
-  <!-- <section>
-    <form>
-      <div class="name">
-        <label for="name1">名前</label>
-        <input type="text" name="name" id="name1" placeholder="鈴木 太郎" />
-      </div>
-      <div class="emotions">
-        <label for="little">
-          <input type="radio" name="emotion" value="1" id="little" />少しうれしい
-        </label>
-        <label for="usually">
-          <input type="radio" name="emotion" value="2" id="usually" checked />うれしい
-        </label>
-        <label for="very">
-          <input type="radio" name="emotion" value="3" id="very" />すごくうれしい
-        </label>
-      </div>
-      <div class="opinion">
-        <label for="opinion">うれしかったこと</label>
-        <textarea id="opinion" placeholder="10円拾ったなど"></textarea>
-      </div>
-      <div class="example">
-        <input type="submit" value="投稿する" />
-      </div>
-    </form>
-  </section> -->
 </template>
