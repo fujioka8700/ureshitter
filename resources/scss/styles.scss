@@ -1,2 +1,4 @@
-@use 'bootstrap/scss/bootstrap';
-@use 'common/index';
+// BootstrapのCSSをすべてインポート
+@import 'bootstrap/scss/bootstrap';
+
+@import 'common/index';
