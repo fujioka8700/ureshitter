@@ -25,7 +25,7 @@ import VeryHappy from '../../images/very-happy.svg';
           <div
             class="emotion-wrap--unit card pt-1 pb-0 px-1"
             :class="{ 'border border-3 border-secondary': emotion === 1 }"
-            @click="chooseEmotion(1)"
+            @click="emotion = 1"
           >
             <img
               :src="LittleHappy"
@@ -39,7 +39,7 @@ import VeryHappy from '../../images/very-happy.svg';
           <div
             class="emotion-wrap--unit card pt-1 pb-0 px-1"
             :class="{ 'border border-3 border-secondary': emotion === 2 }"
-            @click="chooseEmotion(2)"
+            @click="emotion = 2"
           >
             <img
               :src="UsuallyHappy"
@@ -53,7 +53,7 @@ import VeryHappy from '../../images/very-happy.svg';
           <div
             class="emotion-wrap--unit card pt-1 pb-0 px-1"
             :class="{ 'border border-3 border-secondary': emotion === 3 }"
-            @click="chooseEmotion(3)"
+            @click="emotion = 3"
           >
             <img
               :src="VeryHappy"
@@ -97,12 +97,10 @@ export default {
       message: '',
     };
   },
+  computed: {},
   methods: {
     postEmotions() {
       alert('投稿しました。');
-    },
-    chooseEmotion(num) {
-      this.emotion = num;
     },
   },
 };
