@@ -19,7 +19,7 @@ class MessageFactory extends Factory
     return [
       'name' => $this->faker->name(),
       'emotion' => $this->faker->numberBetween(0, 2),
-      'message' => $this->faker->realText(50, 2),
+      'message' => $this->faker->realText(50, 2)
     ];
   }
 }

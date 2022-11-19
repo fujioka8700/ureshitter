@@ -26,13 +26,18 @@ class MessageController extends Controller
    */
   public function store(Request $request)
   {
-    $message = new Message;
-    $message->name = $request->name;
-    $message->emotion = $request->emotion;
-    $message->message = $request->message;
-    $message->save();
+    $message = Message::create([
+      'name' => $request->name,
+      'emotion' => $request->emotion,
+      'message' => $request->message
+    ]);
 
-    return ('api/messages');
+    return response()->json(
+      $message,
+      200,
+      ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],
+      JSON_UNESCAPED_UNICODE
+    );
   }
 
   /**
