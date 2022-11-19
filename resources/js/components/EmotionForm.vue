@@ -7,7 +7,7 @@ import VeryHappy from '../../images/very-happy.svg';
 <template>
   <section class="c-emotion-section">
     <div class="container">
-      <form @submit.prevent="postEmotions()">
+      <form @submit.prevent="postMessage()">
         <div class="d-flex align-items-center mt-3">
           <label for="Name" class="text-nowrap">名前</label>
           <input
@@ -73,7 +73,7 @@ import VeryHappy from '../../images/very-happy.svg';
             class="form-control"
             id="Textarea"
             rows="3"
-            placeholder="10円拾ったよ"
+            placeholder="例 : 10円拾ったよ"
             v-model="message"
           ></textarea>
         </div>
@@ -97,10 +97,21 @@ export default {
       message: '',
     };
   },
-  computed: {},
   methods: {
-    postEmotions() {
-      alert('投稿しました。');
+    async postMessage() {
+      const res = await axios
+        .post('/api/messages', {
+          name: this.name,
+          emotion: this.emotion,
+          message: this.message,
+        })
+        .then(function (response) {
+          alert('投稿しました。');
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          alert('投稿に失敗しました。');
+        });
     },
   },
 };
