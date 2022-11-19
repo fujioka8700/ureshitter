@@ -17,8 +17,6 @@ class MessageControllerTest extends TestCase
    */
   public function test_example()
   {
-    var_dump(env('DB_CONNECTION'));
-
     $response = $this->get('/');
 
     $response->assertStatus(200);
