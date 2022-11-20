@@ -14,6 +14,9 @@ import ArticleItem from './ArticleItem.vue';
       >
         <span class="page-link">{{ page }}</span>
       </li>
+      <li v-show="front_dot" class="page-item disabled inactive">
+        <span class="page-link">...</span>
+      </li>
       <li
         v-for="page in middlePageRange"
         :key="page"
@@ -22,6 +25,9 @@ import ArticleItem from './ArticleItem.vue';
         class="page-item"
       >
         <span class="page-link">{{ page }}</span>
+      </li>
+      <li v-show="end_dot" class="page-item disabled inactive">
+        <span class="page-link">...</span>
       </li>
       <li
         v-for="page in endPageRange"
@@ -49,6 +55,8 @@ export default {
       current_page: 1,
       last_page: '',
       range: 3,
+      front_dot: false,
+      end_dot: false,
     };
   },
   created() {
@@ -64,12 +72,18 @@ export default {
       if (this.current_page <= this.range) {
         start = 3;
         end = this.range + 2;
+        this.front_dot = false;
+        this.end_dot = true;
       } else if (this.current_page > this.last_page - this.range) {
         start = this.last_page - this.range - 1;
         end = this.last_page - 2;
+        this.front_dot = true;
+        this.end_dot = false;
       } else {
         start = this.current_page - Math.floor(this.range / 2);
         end = this.current_page + Math.floor(this.range / 2);
+        this.front_dot = true;
+        this.end_dot = true;
       }
       return this.calRange(start, end);
     },
