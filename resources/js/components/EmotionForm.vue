@@ -24,8 +24,8 @@ import VeryHappy from '../../images/very-happy.svg';
         <div class="emotion-wrap mt-3 d-flex justify-content-between">
           <div
             class="emotion-wrap--unit card pt-1 pb-0 px-1"
-            :class="{ 'border border-3 border-secondary': emotion === 1 }"
-            @click="emotion = 1"
+            :class="{ 'border border-3 border-secondary': emotion === 0 }"
+            @click="emotion = 0"
           >
             <img
               :src="LittleHappy"
@@ -38,8 +38,8 @@ import VeryHappy from '../../images/very-happy.svg';
           </div>
           <div
             class="emotion-wrap--unit card pt-1 pb-0 px-1"
-            :class="{ 'border border-3 border-secondary': emotion === 2 }"
-            @click="emotion = 2"
+            :class="{ 'border border-3 border-secondary': emotion === 1 }"
+            @click="emotion = 1"
           >
             <img
               :src="UsuallyHappy"
@@ -52,8 +52,8 @@ import VeryHappy from '../../images/very-happy.svg';
           </div>
           <div
             class="emotion-wrap--unit card pt-1 pb-0 px-1"
-            :class="{ 'border border-3 border-secondary': emotion === 3 }"
-            @click="emotion = 3"
+            :class="{ 'border border-3 border-secondary': emotion === 2 }"
+            @click="emotion = 2"
           >
             <img
               :src="VeryHappy"

@@ -6,6 +6,13 @@ import ArticleItem from './ArticleItem.vue';
   <div>
     <ul class="pagination">
       <li
+        class="page-item inactive"
+        :class="current_page == 1 ? 'disabled' : ''"
+        @click="changePage(current_page - 1)"
+      >
+        <span class="page-link">«</span>
+      </li>
+      <li
         v-for="page in frontPageRange"
         :key="page"
         @click="changePage(page)"
@@ -37,6 +44,13 @@ import ArticleItem from './ArticleItem.vue';
         class="page-item"
       >
         <span class="page-link">{{ page }}</span>
+      </li>
+      <li
+        class="page-item inactive"
+        :class="current_page >= last_page ? 'disabled' : ''"
+        @click="changePage(current_page + 1)"
+      >
+        <span class="page-link">»</span>
       </li>
     </ul>
   </div>
