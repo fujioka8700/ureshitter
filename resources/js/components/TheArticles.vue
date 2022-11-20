@@ -3,9 +3,10 @@ import ArticleItem from './ArticleItem.vue';
 </script>
 
 <template>
+  <div>ページネーション</div>
   <ul class="list-group">
-    <li v-for="item in items" :key="item">
-      <ArticleItem />
+    <li v-for="message in messages" :key="message">
+      <ArticleItem :name="message.name" :emotion="message.emotion" :message="message.message" />
     </li>
   </ul>
 </template>
@@ -14,8 +15,19 @@ import ArticleItem from './ArticleItem.vue';
 export default {
   data() {
     return {
-      items: 5,
+      currentPage: 1,
+      messages: [],
     };
+  },
+  created() {
+    this.getMessages();
+  },
+  methods: {
+    async getMessages() {
+      const result = await axios.get(`/api/messages?page=${this.currentPage}`);
+
+      this.messages = result.data.data;
+    },
   },
 };
 </script>

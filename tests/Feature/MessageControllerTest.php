@@ -43,6 +43,10 @@ class MessageControllerTest extends TestCase
    */
   public function test_get_message_list()
   {
-    Message::factory()->count(3)->create();
+    Message::factory()->count(10)->create();
+
+    $response = $this->getJson('/api/messages');
+
+    dump($response);
   }
 }

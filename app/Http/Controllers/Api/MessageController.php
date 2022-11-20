@@ -15,7 +15,14 @@ class MessageController extends Controller
    */
   public function index()
   {
-    //
+    $messages = Message::paginate(5);
+
+    return response()->json(
+      $messages,
+      200,
+      ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],
+      JSON_UNESCAPED_UNICODE
+    );
   }
 
   /**
