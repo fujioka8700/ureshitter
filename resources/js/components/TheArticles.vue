@@ -78,11 +78,17 @@ export default {
   },
   computed: {
     frontPageRange() {
+      if (!this.sizeCheck) {
+        this.front_dot = false;
+        this.end_dot = false;
+        return this.calRange(1, this.last_page);
+      }
       return this.calRange(1, 2);
     },
     middlePageRange() {
       let start = '';
       let end = '';
+      if (!this.sizeCheck) return [];
       if (this.current_page <= this.range) {
         start = 3;
         end = this.range + 2;
@@ -102,7 +108,14 @@ export default {
       return this.calRange(start, end);
     },
     endPageRange() {
+      if (!this.sizeCheck) return [];
       return this.calRange(this.last_page - 1, this.last_page);
+    },
+    sizeCheck() {
+      if (this.last_page <= this.range + 2) {
+        return false;
+      }
+      return true;
     },
   },
   methods: {
