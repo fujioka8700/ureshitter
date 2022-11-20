@@ -34,7 +34,7 @@ class MessageController extends Controller
 
     return response()->json(
       $message,
-      200,
+      201,
       ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],
       JSON_UNESCAPED_UNICODE
     );

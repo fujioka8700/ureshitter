@@ -19,12 +19,30 @@ class MessageControllerTest extends TestCase
    */
   public function test_post_a_message()
   {
+    $requestName = $this->faker->name;
+    $requestEmotion = $this->faker->numberBetween(0, 2);
+    $requestMessage = $this->faker->realText(50, 2);
+
     $response = $this->postJson('/api/messages', [
-      'name' => $this->faker->name,
-      'emotion' => $this->faker->numberBetween(0, 2),
-      'message' => $this->faker->realText(50, 2)
+      'name' => $requestName,
+      'emotion' => $requestEmotion,
+      'message' => $requestMessage
     ]);
 
-    $response->assertOk();
+    $response->assertStatus(201)->assertJson([
+      'name' => $requestName,
+      'emotion' => $requestEmotion,
+      'message' => $requestMessage
+    ]);
+  }
+
+  /**
+   * メッセージ一覧の取得
+   *
+   * @return void
+   */
+  public function test_get_message_list()
+  {
+    Message::factory()->count(3)->create();
   }
 }
