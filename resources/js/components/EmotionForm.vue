@@ -8,7 +8,7 @@ import VeryHappy from '../../images/very-happy.svg';
   <section class="c-emotion-section">
     <div class="container">
       <form @submit.prevent="postMessage()">
-        <div class="d-flex align-items-center mt-3">
+        <div class="d-flex align-items-center mt-4">
           <label for="Name" class="text-nowrap">名前</label>
           <input
             type="text"
