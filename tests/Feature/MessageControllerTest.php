@@ -37,7 +37,7 @@ class MessageControllerTest extends TestCase
   }
 
   /**
-   * メッセージ一覧の取得
+   * メッセージ一覧、降順で5件取得
    *
    * @return void
    */
@@ -45,8 +45,14 @@ class MessageControllerTest extends TestCase
   {
     Message::factory()->count(10)->create();
 
+    $messages = Message::orderBy('created_at', 'desc')->get()->take(5)->toArray();
+
     $response = $this->getJson('/api/messages');
 
-    dump($response);
+    $response
+      ->assertStatus(200)
+      ->assertJson([
+        'data' => $messages
+      ]);
   }
 }

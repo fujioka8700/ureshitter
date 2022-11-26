@@ -107,7 +107,6 @@ export default {
         })
         .then(function (response) {
           alert('投稿しました。');
-          console.log(response.data);
         })
         .catch(function (error) {
           alert('投稿に失敗しました。');

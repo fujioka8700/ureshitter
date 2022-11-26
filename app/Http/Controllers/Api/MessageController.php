@@ -15,7 +15,7 @@ class MessageController extends Controller
    */
   public function index()
   {
-    $messages = Message::paginate(5);
+    $messages = Message::orderBy('created_at', 'desc')->paginate(5);
 
     return response()->json(
       $messages,
