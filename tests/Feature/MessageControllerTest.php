@@ -55,4 +55,28 @@ class MessageControllerTest extends TestCase
         'data' => $messages
       ]);
   }
+
+  /**
+   * 無名なら名前を「名無し」にする
+   *
+   * @return void
+   */
+  public function test_set_name_to_no_name()
+  {
+    $requestName = '';
+    $requestEmotion = $this->faker->numberBetween(0, 2);
+    $requestMessage = $this->faker->realText(50, 2);
+
+    $response = $this->postJson('/api/messages', [
+      'name' => $requestName,
+      'emotion' => $requestEmotion,
+      'message' => $requestMessage
+    ]);
+
+    $response->assertStatus(201)->assertJson([
+      'name' => '名無し',
+      'emotion' => $requestEmotion,
+      'message' => $requestMessage
+    ]);
+  }
 }

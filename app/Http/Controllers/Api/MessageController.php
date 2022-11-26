@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Message;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MessagePostRequest;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -28,11 +29,16 @@ class MessageController extends Controller
   /**
    * Store a newly created resource in storage.
    *
-   * @param  \Illuminate\Http\Request  $request
+   * @param  \App\Http\Requests\MessagePostRequest  $request
    * @return \Illuminate\Http\Response
    */
-  public function store(Request $request)
+  public function store(MessagePostRequest $request)
   {
+    // 名前が無ければ「名無し」にする
+    if (is_null($request->name)) {
+      $request->name = '名無し';
+    };
+
     $message = Message::create([
       'name' => $request->name,
       'emotion' => $request->emotion,

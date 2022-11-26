@@ -93,7 +93,7 @@ export default {
   data() {
     return {
       name: '',
-      emotion: 2,
+      emotion: 1,
       message: '',
     };
   },
