@@ -24,7 +24,7 @@ class MessagePostRequest extends FormRequest
   public function rules()
   {
     return [
-      'name' => 'nullable',
+      'name' => 'nullable|max:15',
     ];
   }
 }

@@ -8,7 +8,8 @@ import VeryHappy from '../../images/very-happy.svg';
   <section class="c-emotion-section">
     <div class="container">
       <form @submit.prevent="postMessage()">
-        <div class="d-flex align-items-center mt-4">
+        <div class="text-danger">名前は15文字以内で記入してください。</div>
+        <div class="d-flex align-items-center">
           <label for="Name" class="text-nowrap">名前</label>
           <input
             type="text"
@@ -109,7 +110,7 @@ export default {
           alert('投稿しました。');
         })
         .catch(function (error) {
-          alert('投稿に失敗しました。');
+          alert('投稿できませんでした');
         });
     },
   },
