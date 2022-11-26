@@ -16,8 +16,7 @@ class MessagePostRequest extends FormRequest
     return true;
   }
 
-  // 名前の文字入力数
-  public const NAME_STRING = 15;
+  private const NAME_STRING = 15; // 名前の文字入力数
 
   /**
    * Get the validation rules that apply to the request.
@@ -51,6 +50,7 @@ class MessagePostRequest extends FormRequest
   {
     return [
       'name.max' => ':attributeは' . self::NAME_STRING . '文字以内で入力してください。',
+      'message.required' => 'うれしかったことを記入してください。'
     ];
   }
 }

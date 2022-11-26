@@ -8,11 +8,9 @@ import VeryHappy from '../../images/very-happy.svg';
   <section class="c-emotion-section">
     <div class="container">
       <form @submit.prevent="postMessage()">
-        <ul class="list-group" v-if="error_messages">
-          <li class="text-danger" v-for="error in error_messages" :key="error">
-            {{ error }}
-          </li>
-        </ul>
+        <div v-if="error_messages">
+          <span class="text-danger">{{ error_messages.name }}</span>
+        </div>
         <div class="d-flex align-items-center">
           <label for="Name" class="text-nowrap">名前</label>
           <input
@@ -73,12 +71,15 @@ import VeryHappy from '../../images/very-happy.svg';
         <!-- End of happiness -->
 
         <div class="mt-3">
+          <div v-if="error_messages">
+            <span class="text-danger">{{ error_messages.message }}</span>
+          </div>
           <label for="Textarea" class="form-label">うれしかったこと</label>
           <textarea
             class="form-control"
             id="Textarea"
             rows="3"
-            placeholder="例 : 10円拾ったよ"
+            placeholder="例 : かわいい猫を見かけたよ"
             v-model="message"
           ></textarea>
         </div>
@@ -99,7 +100,7 @@ export default {
     return {
       name: '',
       emotion: 1,
-      message: 'メッセージ',
+      message: '',
       error_messages: {},
     };
   },
@@ -125,13 +126,18 @@ export default {
           return errors;
         });
 
-      // バリデーションエラー内容を削除する
+      // 名前のバリデーションエラー内容を削除する
       if (this.error_messages.name) {
         delete this.error_messages.name;
       }
 
+      // うれしかったことのバリデーションエラー内容を削除する
+      if (this.error_messages.message) {
+        delete this.error_messages.message;
+      }
+
       // バリデーションエラー内容を表示する
-      if (res.hasOwnProperty('name')) {
+      if (res) {
         this.error_messages = res;
       }
     },
