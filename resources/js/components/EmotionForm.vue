@@ -8,7 +8,11 @@ import VeryHappy from '../../images/very-happy.svg';
   <section class="c-emotion-section">
     <div class="container">
       <form @submit.prevent="postMessage()">
-        <div class="text-danger">名前は15文字以内で記入してください。</div>
+        <ul class="list-group" v-if="error_messages">
+          <li class="text-danger" v-for="error in error_messages" :key="error">
+            {{ error }}
+          </li>
+        </ul>
         <div class="d-flex align-items-center">
           <label for="Name" class="text-nowrap">名前</label>
           <input
@@ -95,7 +99,8 @@ export default {
     return {
       name: '',
       emotion: 1,
-      message: '',
+      message: 'メッセージ',
+      error_messages: {},
     };
   },
   methods: {
@@ -108,10 +113,27 @@ export default {
         })
         .then(function (response) {
           alert('投稿しました。');
+          return false;
         })
         .catch(function (error) {
-          alert('投稿できませんでした');
+          let errors = {};
+
+          for (let key in error.response.data.errors) {
+            errors[key] = error.response.data.errors[key][0];
+          }
+
+          return errors;
         });
+
+      // バリデーションエラー内容を削除する
+      if (this.error_messages.name) {
+        delete this.error_messages.name;
+      }
+
+      // バリデーションエラー内容を表示する
+      if (res.hasOwnProperty('name')) {
+        this.error_messages = res;
+      }
     },
   },
 };

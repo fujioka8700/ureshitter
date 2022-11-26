@@ -16,6 +16,9 @@ class MessagePostRequest extends FormRequest
     return true;
   }
 
+  // 名前の文字入力数
+  public const NAME_STRING = 15;
+
   /**
    * Get the validation rules that apply to the request.
    *
@@ -24,7 +27,15 @@ class MessagePostRequest extends FormRequest
   public function rules()
   {
     return [
-      'name' => 'nullable|max:15',
+      'name' => 'nullable|max:' . self::NAME_STRING,
+      'message' => 'required',
+    ];
+  }
+
+  public function messages()
+  {
+    return [
+      'name.max' => '名前は' . self::NAME_STRING . '文字以内で入力してください。',
     ];
   }
 }
