@@ -32,10 +32,25 @@ class MessagePostRequest extends FormRequest
     ];
   }
 
+  /**
+   *  バリデーション項目名定義
+   * @return array
+   */
+  public function attributes()
+  {
+    return [
+      'name' => '名前',
+    ];
+  }
+
+  /**
+   * バリデーションメッセージ
+   * @return array
+   */
   public function messages()
   {
     return [
-      'name.max' => '名前は' . self::NAME_STRING . '文字以内で入力してください。',
+      'name.max' => ':attributeは' . self::NAME_STRING . '文字以内で入力してください。',
     ];
   }
 }
