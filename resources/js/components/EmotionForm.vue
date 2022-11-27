@@ -7,8 +7,11 @@ import VeryHappy from '../../images/very-happy.svg';
 <template>
   <section class="c-emotion-section">
     <div class="container">
-      <form @submit.prevent="postEmotions()">
-        <div class="d-flex align-items-center mt-3">
+      <form @submit.prevent="postMessage()">
+        <div v-if="error_messages">
+          <span class="text-danger">{{ error_messages.name }}</span>
+        </div>
+        <div class="d-flex align-items-center">
           <label for="Name" class="text-nowrap">名前</label>
           <input
             type="text"
@@ -24,8 +27,8 @@ import VeryHappy from '../../images/very-happy.svg';
         <div class="emotion-wrap mt-3 d-flex justify-content-between">
           <div
             class="emotion-wrap--unit card pt-1 pb-0 px-1"
-            :class="{ 'border border-3 border-secondary': emotion === 1 }"
-            @click="chooseEmotion(1)"
+            :class="{ 'border border-3 border-secondary': emotion === 0 }"
+            @click="emotion = 0"
           >
             <img
               :src="LittleHappy"
@@ -38,8 +41,8 @@ import VeryHappy from '../../images/very-happy.svg';
           </div>
           <div
             class="emotion-wrap--unit card pt-1 pb-0 px-1"
-            :class="{ 'border border-3 border-secondary': emotion === 2 }"
-            @click="chooseEmotion(2)"
+            :class="{ 'border border-3 border-secondary': emotion === 1 }"
+            @click="emotion = 1"
           >
             <img
               :src="UsuallyHappy"
@@ -52,8 +55,8 @@ import VeryHappy from '../../images/very-happy.svg';
           </div>
           <div
             class="emotion-wrap--unit card pt-1 pb-0 px-1"
-            :class="{ 'border border-3 border-secondary': emotion === 3 }"
-            @click="chooseEmotion(3)"
+            :class="{ 'border border-3 border-secondary': emotion === 2 }"
+            @click="emotion = 2"
           >
             <img
               :src="VeryHappy"
@@ -68,12 +71,15 @@ import VeryHappy from '../../images/very-happy.svg';
         <!-- End of happiness -->
 
         <div class="mt-3">
+          <div v-if="error_messages">
+            <span class="text-danger">{{ error_messages.message }}</span>
+          </div>
           <label for="Textarea" class="form-label">うれしかったこと</label>
           <textarea
             class="form-control"
             id="Textarea"
             rows="3"
-            placeholder="10円拾ったよ"
+            placeholder="例 : かわいい猫を見かけたよ"
             v-model="message"
           ></textarea>
         </div>
@@ -93,16 +99,47 @@ export default {
   data() {
     return {
       name: '',
-      emotion: 2,
+      emotion: 1,
       message: '',
+      error_messages: {},
     };
   },
   methods: {
-    postEmotions() {
-      alert('投稿しました。');
-    },
-    chooseEmotion(num) {
-      this.emotion = num;
+    async postMessage() {
+      const res = await axios
+        .post('/api/messages', {
+          name: this.name,
+          emotion: this.emotion,
+          message: this.message,
+        })
+        .then(function (response) {
+          alert('投稿しました。');
+          return false;
+        })
+        .catch(function (error) {
+          let errors = {};
+
+          for (let key in error.response.data.errors) {
+            errors[key] = error.response.data.errors[key][0];
+          }
+
+          return errors;
+        });
+
+      // 名前のバリデーションエラー内容を削除する
+      if (this.error_messages.name) {
+        delete this.error_messages.name;
+      }
+
+      // うれしかったことのバリデーションエラー内容を削除する
+      if (this.error_messages.message) {
+        delete this.error_messages.message;
+      }
+
+      // バリデーションエラー内容を表示する
+      if (res) {
+        this.error_messages = res;
+      }
     },
   },
 };
