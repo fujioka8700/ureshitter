@@ -135,4 +135,30 @@ class MessageControllerTest extends TestCase
         ]
       ]);
   }
+
+  /**
+   * うれしかったこと141文字以上ならエラーメッセージを返す
+   */
+  public function test_error_over_141_characters_in_message()
+  {
+    $error_messages = array('うれしかったことは140文字以下で入力してください。');
+
+    $requestName = $this->faker->name;
+    $requestEmotion = $this->faker->numberBetween(0, 2);
+    $requestMessage = $this->faker->realTextBetween(141, 200, 2);
+
+    $response = $this->postJson('/api/messages', [
+      'name' => $requestName,
+      'emotion' => $requestEmotion,
+      'message' => $requestMessage
+    ]);
+
+    $response
+      ->assertStatus(422)
+      ->assertJson([
+        'errors' => [
+          'message' => $error_messages,
+        ]
+      ]);
+  }
 }
