@@ -16,7 +16,8 @@ class MessagePostRequest extends FormRequest
     return true;
   }
 
-  private const NAME_STRING = 15; // 名前の文字入力数
+  private const NAME_STRING    = 15;  // 名前の文字入力数
+  private const MESSAGE_STRING = 140; // うれしかったことの文字入力数
 
   /**
    * Get the validation rules that apply to the request.
@@ -26,8 +27,9 @@ class MessagePostRequest extends FormRequest
   public function rules()
   {
     return [
-      'name' => 'nullable|max:' . self::NAME_STRING,
-      'message' => 'required',
+      'name' => 'nullable|string|max:' . self::NAME_STRING,
+      'emotion' => 'required|integer|min:0|max:2',
+      'message' => 'required|string|max:' . self::MESSAGE_STRING,
     ];
   }
 
@@ -39,6 +41,7 @@ class MessagePostRequest extends FormRequest
   {
     return [
       'name' => '名前',
+      'message' => 'うれしかったこと',
     ];
   }
 
@@ -50,7 +53,8 @@ class MessagePostRequest extends FormRequest
   {
     return [
       'name.max' => ':attributeは' . self::NAME_STRING . '文字以下で入力してください。',
-      'message.required' => 'うれしかったことを記入してください。'
+      'message.required' => ':attributeを記入してください。',
+      'message.max' => ':attributeは' . self::MESSAGE_STRING . '文字以下で入力してください。',
     ];
   }
 }
