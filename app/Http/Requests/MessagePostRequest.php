@@ -49,7 +49,7 @@ class MessagePostRequest extends FormRequest
   public function messages()
   {
     return [
-      'name.max' => ':attributeは' . self::NAME_STRING . '文字以内で入力してください。',
+      'name.max' => ':attributeは' . self::NAME_STRING . '文字以下で入力してください。',
       'message.required' => 'うれしかったことを記入してください。'
     ];
   }

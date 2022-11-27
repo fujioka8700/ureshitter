@@ -85,9 +85,9 @@ class MessageControllerTest extends TestCase
    *
    * @return void
    */
-  public function test_error_if_the_name_is_longer_than_16_characters()
+  public function test_error_over_16_characters_in_name()
   {
-    $error_messages = array('名前は15文字以内で入力してください。');
+    $error_messages = array('名前は15文字以下で入力してください。');
 
     $requestName = $this->faker->realTextBetween(16, 50, 2);
     $requestEmotion = $this->faker->numberBetween(0, 2);
@@ -104,6 +104,34 @@ class MessageControllerTest extends TestCase
       ->assertJson([
         'errors' => [
           'name' => $error_messages,
+        ]
+      ]);
+  }
+
+  /**
+   * うれしかったこと無記入ならエラーメッセージを返す
+   *
+   * @return void
+   */
+  public function test_no_message_error()
+  {
+    $error_messages = array('うれしかったことを記入してください。');
+
+    $requestName = $this->faker->name;
+    $requestEmotion = $this->faker->numberBetween(0, 2);
+    $requestMessage = '';
+
+    $response = $this->postJson('/api/messages', [
+      'name' => $requestName,
+      'emotion' => $requestEmotion,
+      'message' => $requestMessage
+    ]);
+
+    $response
+      ->assertStatus(422)
+      ->assertJson([
+        'errors' => [
+          'message' => $error_messages,
         ]
       ]);
   }
