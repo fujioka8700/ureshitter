@@ -1,8 +1,3 @@
-<script setup>
-import ArticleItem from './ArticleItem.vue';
-import ThePagination from './ThePagination.vue';
-</script>
-
 <template>
   <div class="container">
     <div class="mt-3 d-flex justify-content-center">
@@ -17,7 +12,14 @@ import ThePagination from './ThePagination.vue';
 </template>
 
 <script>
+import ThePagination from './ThePagination.vue';
+import ArticleItem from './ArticleItem.vue';
+
 export default {
+  components: {
+    ThePagination,
+    ArticleItem,
+  },
   data() {
     return {
       messages: [],
@@ -30,5 +32,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped></style>
