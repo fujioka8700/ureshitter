@@ -1,7 +1,7 @@
 <script setup>
-import LittleHappy from '../../images/little-happy.svg';
-import UsuallyHappy from '../../images/usually-happy.svg';
-import VeryHappy from '../../images/very-happy.svg';
+import LittleHappy from '../../../images/little-happy.svg';
+import UsuallyHappy from '../../../images/usually-happy.svg';
+import VeryHappy from '../../../images/very-happy.svg';
 </script>
 
 <template>

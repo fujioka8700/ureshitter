@@ -1,11 +1,5 @@
 <template>
-  <div class="c-notfound">
+  <div class="p-notfound">
     <h1>404 Not Found</h1>
   </div>
 </template>
-
-<style scoped>
-.c-notfound {
-  margin-top: 60px;
-}
-</style>
