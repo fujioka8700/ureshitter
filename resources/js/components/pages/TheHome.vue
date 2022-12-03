@@ -3,9 +3,9 @@
 </template>
 
 <script>
-import TheSummary from './TheSummary.vue';
-import EmotionForm from './EmotionForm.vue';
-import TheArticles from './TheArticles.vue';
+import TheSummary from '../modules/TheSummary.vue';
+import EmotionForm from '../modules/EmotionForm.vue';
+import TheArticles from '../TheArticles.vue';
 
 export default {
   components: {
