@@ -1,5 +1,5 @@
 <template>
-  <div class="c-thehome"><TheSummary /><EmotionForm /><TheArticles /></div>
+  <div class="p-thehome"><TheSummary /><EmotionForm /><TheArticles /></div>
 </template>
 
 <script>

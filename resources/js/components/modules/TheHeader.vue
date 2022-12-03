@@ -3,7 +3,7 @@ import logo from '../../../images/logo.svg';
 </script>
 
 <template>
-  <header class="c-header shadow-sm bg-white position-fixed top-0 start-0 w-100">
+  <header class="l-header shadow-sm bg-white position-fixed top-0 start-0 w-100">
     <div class="container">
       <div class="wrapper pt-3 pb-3">
         <a href="#" class="text-decoration-none">
