@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import ThePagination from './modules/ThePagination.vue';
+import ThePagination from './ThePagination.vue';
 import ArticleItem from './ArticleItem.vue';
 
 export default {

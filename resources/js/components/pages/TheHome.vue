@@ -5,7 +5,7 @@
 <script>
 import TheSummary from '../modules/TheSummary.vue';
 import EmotionForm from '../modules/EmotionForm.vue';
-import TheArticles from '../TheArticles.vue';
+import TheArticles from '../modules/TheArticles.vue';
 
 export default {
   components: {
