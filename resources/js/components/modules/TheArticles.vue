@@ -28,6 +28,8 @@ export default {
   methods: {
     messageUpdate(messages) {
       this.messages = messages;
+
+      return false;
     },
   },
 };

@@ -106,19 +106,19 @@ export default {
   },
   methods: {
     async postMessage() {
-      const res = await axios
+      const response = await axios
         .post('/api/messages', {
           name: this.name,
           emotion: this.emotion,
           message: this.message,
         })
         .then(function (response) {
-          alert('投稿しました。');
           return false;
         })
         .catch(function (error) {
           let errors = {};
 
+          // Laravelから返ってきたバリデーションエラー内容を取り出す
           for (let key in error.response.data.errors) {
             errors[key] = error.response.data.errors[key][0];
           }
@@ -126,20 +126,26 @@ export default {
           return errors;
         });
 
-      // 名前のバリデーションエラー内容を削除する
-      if (this.error_messages.name) {
-        delete this.error_messages.name;
-      }
+      this.showValidationErrors(response);
 
-      // うれしかったことのバリデーションエラー内容を削除する
-      if (this.error_messages.message) {
-        delete this.error_messages.message;
-      }
+      this.checkForValidationErrors(response);
 
-      // バリデーションエラー内容を表示する
-      if (res) {
-        this.error_messages = res;
+      return false;
+    },
+    showValidationErrors(response) {
+      if (Object.keys(response).length !== 0) {
+        this.error_messages = response;
       }
+    },
+    checkForValidationErrors(response) {
+      if (Object.keys(response).length === 0) {
+        this.goToPostSuccessPage();
+      }
+    },
+    goToPostSuccessPage() {
+      this.$router.push({
+        name: 'success',
+      });
     },
   },
 };
