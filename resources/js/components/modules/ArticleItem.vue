@@ -59,6 +59,8 @@ export default {
         default:
           break;
       }
+
+      return false;
     },
   },
 };
