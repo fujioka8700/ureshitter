@@ -2,7 +2,7 @@
 import LittleHappy from '../../../images/little-happy.svg';
 import UsuallyHappy from '../../../images/usually-happy.svg';
 import VeryHappy from '../../../images/very-happy.svg';
-import { EMOTION_MESSAGE } from '../../config';
+import { CREATED, EMOTION_MESSAGE } from '../../config';
 </script>
 
 <template>
@@ -47,9 +47,9 @@ export default {
     };
   },
   created() {
-    this.name = this.$route.query.name;
-    this.message = this.$route.query.message;
-    this.emotion = parseInt(this.$route.query.emotion);
+    this.goToNotfoudInsteadOfSuccess();
+
+    this.savePostData();
 
     this.iconType();
   },
@@ -73,6 +73,18 @@ export default {
       }
 
       return false;
+    },
+    goToNotfoudInsteadOfSuccess() {
+      const status = parseInt(this.$route.query.status);
+
+      if (status !== CREATED) {
+        this.$router.push({ path: 'notfound' });
+      }
+    },
+    savePostData() {
+      this.name = this.$route.query.name;
+      this.message = this.$route.query.message;
+      this.emotion = parseInt(this.$route.query.emotion);
     },
   },
 };

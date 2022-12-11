@@ -154,6 +154,7 @@ export default {
           name: content.data.name,
           message: content.data.message,
           emotion: content.data.emotion,
+          status: content.status,
         },
       });
     },
