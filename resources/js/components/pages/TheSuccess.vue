@@ -2,21 +2,22 @@
 import LittleHappy from '../../../images/little-happy.svg';
 import UsuallyHappy from '../../../images/usually-happy.svg';
 import VeryHappy from '../../../images/very-happy.svg';
+import { EMOTION_MESSAGE } from '../../config';
 </script>
 
 <template>
   <div class="p-thesuccess">
     <div class="container">
-      <p class="pt-3">投稿できました。</p>
+      <div class="text-center pt-4 pb-4">
+        <span>投稿できました。</span>
+      </div>
       <div class="d-flex justify-content-center">
         <div class="card" style="width: 18rem">
-          <img :src="LittleHappy" class="text-bg-light m-2" alt="" />
-          <span class="text-center">少しうれしい</span>
+          <img :src="imgSrc" class="text-bg-light m-2" alt="" />
+          <span class="text-center">{{ emotionMessage }}</span>
           <div class="card-body">
-            <p class="card-text">
-              10円拾ったよ。10円拾ったよ。10円拾ったよ。10円拾ったよ。10円拾ったよ。
-            </p>
-            <div class="text-end">田中太郎さん</div>
+            <p class="card-text">{{ message }}</p>
+            <div class="text-end">{{ name }} さん</div>
           </div>
         </div>
       </div>
@@ -38,24 +39,18 @@ import VeryHappy from '../../../images/very-happy.svg';
 export default {
   data() {
     return {
+      name: '',
+      message: '',
+      emotionMessage: '',
+      emotion: null,
       imgSrc: '',
     };
   },
-  props: {
-    name: {
-      type: String,
-      required: true,
-    },
-    emotion: {
-      type: Number,
-      required: true,
-    },
-    message: {
-      type: String,
-      required: true,
-    },
-  },
   created() {
+    this.name = this.$route.query.name;
+    this.message = this.$route.query.message;
+    this.emotion = parseInt(this.$route.query.emotion);
+
     this.iconType();
   },
   methods: {
@@ -63,12 +58,15 @@ export default {
       switch (this.emotion) {
         case 0:
           this.imgSrc = LittleHappy;
+          this.emotionMessage = EMOTION_MESSAGE[0];
           break;
         case 1:
           this.imgSrc = UsuallyHappy;
+          this.emotionMessage = EMOTION_MESSAGE[1];
           break;
         case 2:
           this.imgSrc = VeryHappy;
+          this.emotionMessage = EMOTION_MESSAGE[2];
           break;
         default:
           break;

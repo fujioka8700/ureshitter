@@ -2,6 +2,7 @@
 import LittleHappy from '../../../images/little-happy.svg';
 import UsuallyHappy from '../../../images/usually-happy.svg';
 import VeryHappy from '../../../images/very-happy.svg';
+import { EMOTION_MESSAGE } from '../../config';
 </script>
 
 <template>
@@ -32,11 +33,11 @@ import VeryHappy from '../../../images/very-happy.svg';
           >
             <img
               :src="LittleHappy"
-              alt="少しうれしい画像"
+              alt="少しうれしい顔"
               class="card-img-top bg-secondary bg-opacity-25 rounded-1"
             />
             <div class="card-body p-0">
-              <p class="card-text text-center">少しうれしい</p>
+              <p class="card-text text-center">{{ EMOTION_MESSAGE[0] }}</p>
             </div>
           </div>
           <div
@@ -46,11 +47,11 @@ import VeryHappy from '../../../images/very-happy.svg';
           >
             <img
               :src="UsuallyHappy"
-              alt="うれしい画像"
+              alt="うれしい顔"
               class="card-img-top bg-secondary bg-opacity-25 rounded-1"
             />
             <div class="card-body p-0 position-relative">
-              <p class="card-text text-center">うれしい</p>
+              <p class="card-text text-center">{{ EMOTION_MESSAGE[1] }}</p>
             </div>
           </div>
           <div
@@ -60,11 +61,11 @@ import VeryHappy from '../../../images/very-happy.svg';
           >
             <img
               :src="VeryHappy"
-              alt="すごくうれしい画像"
+              alt="すごくうれしい顔"
               class="card-img-top bg-secondary bg-opacity-25 rounded-1"
             />
             <div class="card-body p-0">
-              <p class="card-text text-center">すごくうれしい</p>
+              <p class="card-text text-center">{{ EMOTION_MESSAGE[2] }}</p>
             </div>
           </div>
         </div>
@@ -106,6 +107,8 @@ export default {
   },
   methods: {
     async postMessage() {
+      let post_success_content;
+
       const response = await axios
         .post('/api/messages', {
           name: this.name,
@@ -113,6 +116,8 @@ export default {
           message: this.message,
         })
         .then(function (response) {
+          post_success_content = response;
+
           return false;
         })
         .catch(function (error) {
@@ -128,7 +133,7 @@ export default {
 
       this.showValidationErrors(response);
 
-      this.checkForValidationErrors(response);
+      this.checkForValidationErrors(response, post_success_content);
 
       return false;
     },
@@ -137,14 +142,19 @@ export default {
         this.error_messages = response;
       }
     },
-    checkForValidationErrors(response) {
+    checkForValidationErrors(response, content) {
       if (Object.keys(response).length === 0) {
-        this.goToPostSuccessPage();
+        this.goToPostSuccessPage(content);
       }
     },
-    goToPostSuccessPage() {
+    goToPostSuccessPage(content) {
       this.$router.push({
         name: 'success',
+        query: {
+          name: content.data.name,
+          message: content.data.message,
+          emotion: content.data.emotion,
+        },
       });
     },
   },
