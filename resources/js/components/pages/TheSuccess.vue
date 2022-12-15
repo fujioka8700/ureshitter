@@ -6,7 +6,7 @@ import { CREATED, EMOTION_MESSAGE } from '../../config';
 </script>
 
 <template>
-  <div class="p-thesuccess">
+  <div class="p-thesuccess" id="p-thesuccess">
     <div class="container">
       <div class="text-center pt-4 pb-4">
         <span>投稿できました。</span>
@@ -22,21 +22,21 @@ import { CREATED, EMOTION_MESSAGE } from '../../config';
         </div>
       </div>
       <div class="mt-4 d-flex justify-content-around">
-        <button type="button" class="btn btn-info rounded-pill">
-          <i class="bi bi-twitter text-white"></i>
-          <span class="ms-1">
-            <a
-              class="twitter-share-button text-white text-decoration-none"
-              :href="twitterURL"
-              target="_blank"
-              >Tweetする
-            </a>
-          </span>
-        </button>
+        <a
+          href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+          class="twitter-share-button"
+          :data-text="twitterText"
+          :data-url="originURL"
+          data-size="large"
+          data-hashtags="Ureshitter"
+          data-lang="ja"
+          data-show-count="false"
+          >Tweet
+        </a>
         <button type="button" class="btn btn-secondary">
-          <router-link :to="{ name: 'home' }" class="text-decoration-none"
-            ><span class="text-white">トップ画面に戻る</span></router-link
-          >
+          <router-link :to="{ name: 'home' }" class="text-decoration-none">
+            <span class="text-white">トップ画面に戻る</span>
+          </router-link>
         </button>
       </div>
     </div>
@@ -61,11 +61,17 @@ export default {
 
     this.iconType();
   },
+  mounted() {
+    this.twitterExternalScript();
+  },
   computed: {
-    twitterURL: function () {
+    twitterText() {
+      return `【${this.emotionMessage}】${this.message}+-+${this.name}`;
+    },
+    originURL() {
       const uri = new URL(window.location.href);
 
-      return `https://twitter.com/intent/tweet?text=【${this.emotionMessage}】${this.message}+-+${this.name}さん&url=${uri.origin}`;
+      return uri.origin;
     },
   },
   methods: {
@@ -100,6 +106,12 @@ export default {
       this.name = this.$route.query.name;
       this.message = this.$route.query.message;
       this.emotion = parseInt(this.$route.query.emotion);
+    },
+    twitterExternalScript() {
+      let scriptEl = document.createElement('script');
+
+      scriptEl.setAttribute('src', 'https://platform.twitter.com/widgets.js');
+      document.getElementById('p-thesuccess').appendChild(scriptEl);
     },
   },
 };

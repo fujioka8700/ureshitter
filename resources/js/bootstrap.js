@@ -36,7 +36,3 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 // Bootstrapを利用する
 // https://bootstrap-guide.com/
 import * as bootstrap from 'bootstrap';
-
-// bootstrap iconsを利用する
-// https://icons.getbootstrap.com/
-import 'bootstrap-icons/font/bootstrap-icons.css';
