@@ -23,7 +23,15 @@ import { CREATED, EMOTION_MESSAGE } from '../../config';
       </div>
       <div class="mt-4 d-flex justify-content-around">
         <button type="button" class="btn btn-info rounded-pill">
-          <i class="bi bi-twitter text-white"></i><span class="ms-1 text-white">tweetする</span>
+          <i class="bi bi-twitter text-white"></i>
+          <span class="ms-1">
+            <a
+              class="twitter-share-button text-white text-decoration-none"
+              :href="twitterURL"
+              target="_blank"
+              >Tweetする
+            </a>
+          </span>
         </button>
         <button type="button" class="btn btn-secondary">
           <router-link :to="{ name: 'home' }" class="text-decoration-none"
@@ -52,6 +60,13 @@ export default {
     this.savePostData();
 
     this.iconType();
+  },
+  computed: {
+    twitterURL: function () {
+      const uri = new URL(window.location.href);
+
+      return `https://twitter.com/intent/tweet?text=【${this.emotionMessage}】${this.message}+-+${this.name}さん&url=${uri.origin}`;
+    },
   },
   methods: {
     iconType() {
