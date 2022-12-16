@@ -1,3 +1,8 @@
 .p-thehome {
   margin-top: 60px;
+
+  @media screen and (min-width: 576px) {
+    width: 540px;
+    margin: 0 auto;
+  }
 }
