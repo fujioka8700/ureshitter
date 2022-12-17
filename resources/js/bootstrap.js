@@ -33,6 +33,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     enabledTransports: ['ws', 'wss'],
 // });
 
-// Bootstrapを利用する
+// Bootstrap5 のリファレンスはこちら。
 // https://bootstrap-guide.com/
 import * as bootstrap from 'bootstrap';
