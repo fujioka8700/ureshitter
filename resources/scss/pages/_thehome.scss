@@ -1,7 +1,9 @@
+@use '../global' as g;
+
 .p-thehome {
   margin-top: 60px;
 
-  @media screen and (min-width: 576px) {
+  @include g.pc() {
     width: 540px;
     margin: 0 auto;
   }

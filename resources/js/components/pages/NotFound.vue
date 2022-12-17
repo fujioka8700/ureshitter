@@ -1,5 +1,5 @@
 <template>
   <div class="p-notfound">
-    <h1>404 Not Found</h1>
+    <p>404 ページを表示できません。</p>
   </div>
 </template>
