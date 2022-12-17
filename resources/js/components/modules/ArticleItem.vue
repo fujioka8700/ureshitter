@@ -11,7 +11,7 @@ import VeryHappy from '../../../images/very-happy.svg';
         <img :src="imgSrc" class="bg-secondary bg-opacity-25 rounded-1 me-2" alt="" />
         <div>
           <p class="mb-0">{{ name }} さん</p>
-          <div class="article-message overflow-auto">
+          <div class="article-message overflow-auto text-break">
             <p>{{ message }}</p>
           </div>
         </div>
