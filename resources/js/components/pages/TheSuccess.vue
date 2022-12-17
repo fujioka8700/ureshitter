@@ -6,7 +6,7 @@ import { CREATED, EMOTION_MESSAGE } from '../../config';
 </script>
 
 <template>
-  <div class="p-thesuccess" id="p-thesuccess">
+  <div class="p-thesuccess main-background" id="p-thesuccess">
     <div class="container">
       <div class="text-center pt-4 pb-4">
         <span>投稿できました。</span>
