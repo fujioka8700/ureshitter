@@ -6,8 +6,13 @@
       </div>
     </div>
     <ul class="list-group erase-bullet">
-      <li v-for="message in messages" :key="message">
-        <ArticleItem :name="message.name" :emotion="message.emotion" :message="message.message" />
+      <li v-for="(message, index) in messages" :key="message">
+        <ArticleItem
+          :name="message.name"
+          :emotion="message.emotion"
+          :message="message.message"
+          :last="index === messages.length - 1"
+        />
       </li>
     </ul>
   </div>

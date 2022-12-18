@@ -6,9 +6,9 @@ import { EMOTION_BGCOLOR } from '../../config';
 </script>
 
 <template>
-  <article class="c-article">
+  <article class="c-article-item">
     <div class="container">
-      <div class="article-item mt-3 d-flex">
+      <div class="pt-2 pb-2 border-bottom d-flex" :class="{ 'border-end__remove': last }">
         <img :src="imgSrc" class="bg-opacity-25 rounded-1 me-2" :class="bgColor" alt="" />
         <div>
           <p class="mb-0">{{ name }} さん</p>
@@ -40,6 +40,10 @@ export default {
     },
     message: {
       type: String,
+      required: true,
+    },
+    last: {
+      type: Boolean,
       required: true,
     },
   },
