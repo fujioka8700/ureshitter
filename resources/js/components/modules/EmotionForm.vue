@@ -34,7 +34,7 @@ import { EMOTION_MESSAGE } from '../../config';
             <img
               :src="LittleHappy"
               alt="少しうれしい顔"
-              class="card-img-top bg-secondary bg-opacity-25 rounded-1"
+              class="card-img-top u-bg-little-happy bg-opacity-25 rounded-1"
             />
             <div class="card-body p-0">
               <p class="card-text text-center">{{ EMOTION_MESSAGE[0] }}</p>
@@ -48,7 +48,7 @@ import { EMOTION_MESSAGE } from '../../config';
             <img
               :src="UsuallyHappy"
               alt="うれしい顔"
-              class="card-img-top bg-secondary bg-opacity-25 rounded-1"
+              class="card-img-top u-bg-usually-happy bg-opacity-25 rounded-1"
             />
             <div class="card-body p-0 position-relative">
               <p class="card-text text-center">{{ EMOTION_MESSAGE[1] }}</p>
@@ -62,7 +62,7 @@ import { EMOTION_MESSAGE } from '../../config';
             <img
               :src="VeryHappy"
               alt="すごくうれしい顔"
-              class="card-img-top bg-secondary bg-opacity-25 rounded-1"
+              class="card-img-top u-bg-very-happy bg-opacity-25 rounded-1"
             />
             <div class="card-body p-0">
               <p class="card-text text-center">{{ EMOTION_MESSAGE[2] }}</p>
