@@ -2,7 +2,7 @@
 import LittleHappy from '../../../images/little-happy.svg';
 import UsuallyHappy from '../../../images/usually-happy.svg';
 import VeryHappy from '../../../images/very-happy.svg';
-import { CREATED, EMOTION_MESSAGE } from '../../config';
+import { CREATED, EMOTION_MESSAGE, EMOTION_BGCOLOR } from '../../config';
 </script>
 
 <template>
@@ -13,7 +13,7 @@ import { CREATED, EMOTION_MESSAGE } from '../../config';
       </div>
       <div class="d-flex justify-content-center">
         <div class="card" style="width: 18rem">
-          <img :src="imgSrc" class="text-bg-light m-2" alt="" />
+          <img :src="imgSrc" class="m-2" :class="bgColor" alt="" />
           <span class="text-center">{{ emotionMessage }}</span>
           <div class="card-body">
             <p class="card-text">{{ message }}</p>
@@ -52,6 +52,7 @@ export default {
       emotionMessage: '',
       emotion: null,
       imgSrc: '',
+      bgColor: '',
     };
   },
   created() {
@@ -79,14 +80,17 @@ export default {
       switch (this.emotion) {
         case 0:
           this.imgSrc = LittleHappy;
+          this.bgColor = EMOTION_BGCOLOR[0];
           this.emotionMessage = EMOTION_MESSAGE[0];
           break;
         case 1:
           this.imgSrc = UsuallyHappy;
+          this.bgColor = EMOTION_BGCOLOR[1];
           this.emotionMessage = EMOTION_MESSAGE[1];
           break;
         case 2:
           this.imgSrc = VeryHappy;
+          this.bgColor = EMOTION_BGCOLOR[2];
           this.emotionMessage = EMOTION_MESSAGE[2];
           break;
         default:

@@ -2,6 +2,7 @@
 import LittleHappy from '../../../images/little-happy.svg';
 import UsuallyHappy from '../../../images/usually-happy.svg';
 import VeryHappy from '../../../images/very-happy.svg';
+import { EMOTION_BGCOLOR } from '../../config';
 </script>
 
 <template>
@@ -50,15 +51,15 @@ export default {
       switch (this.emotion) {
         case 0:
           this.imgSrc = LittleHappy;
-          this.bgColor = 'u-bg-little-happy';
+          this.bgColor = EMOTION_BGCOLOR[0];
           break;
         case 1:
           this.imgSrc = UsuallyHappy;
-          this.bgColor = 'u-bg-usually-happy';
+          this.bgColor = EMOTION_BGCOLOR[1];
           break;
         case 2:
           this.imgSrc = VeryHappy;
-          this.bgColor = 'u-bg-very-happy';
+          this.bgColor = EMOTION_BGCOLOR[2];
           break;
         default:
           break;
