@@ -8,10 +8,22 @@ import { EMOTION_BGCOLOR } from '../../config';
 <template>
   <article class="c-article-item">
     <div class="container">
-      <div class="pt-2 pb-2 border-bottom d-flex" :class="{ 'border-end__remove': last }">
-        <img :src="imgSrc" class="bg-opacity-25 rounded-1 me-2" :class="bgColor" alt="" />
+      <div
+        class="pt-2 pb-2 border-bottom d-flex"
+        :class="{ 'border-end__remove': last }"
+        @mouseover="mouseOverAction"
+        @mouseleave="mouseLeaveAction"
+      >
+        <img
+          :src="imgSrc"
+          class="bg-opacity-25 rounded-1 me-2"
+          :class="[bgColor, { 'opacity-50': messageMouseOver }]"
+          alt=""
+        />
         <div>
-          <p class="mb-0">{{ name }} さん</p>
+          <p class="mb-0 text-primary" :class="{ 'text-decoration-underline': messageMouseOver }">
+            {{ name }} さん
+          </p>
           <div class="article-message overflow-auto text-break">
             <p>{{ message }}</p>
           </div>
@@ -27,6 +39,7 @@ export default {
     return {
       imgSrc: '',
       bgColor: '',
+      messageMouseOver: false,
     };
   },
   props: {
@@ -70,6 +83,12 @@ export default {
       }
 
       return false;
+    },
+    mouseOverAction() {
+      this.messageMouseOver = true;
+    },
+    mouseLeaveAction() {
+      this.messageMouseOver = false;
     },
   },
 };
