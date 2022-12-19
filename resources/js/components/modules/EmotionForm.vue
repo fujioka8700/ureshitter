@@ -27,7 +27,7 @@ import { EMOTION_MESSAGE } from '../../config';
 
         <div class="emotion-wrap mt-3 d-flex justify-content-between">
           <div
-            class="emotion-wrap--unit card pt-1 pb-0 px-1 u-pointer--cursor u-mouse-hover-color"
+            class="card pt-1 pb-0 px-1 u-pointer--cursor u-mouse-hover-color"
             :class="{ 'border border-3 border-secondary': emotion === 0 }"
             @click="emotion = 0"
           >
@@ -41,7 +41,7 @@ import { EMOTION_MESSAGE } from '../../config';
             </div>
           </div>
           <div
-            class="emotion-wrap--unit card pt-1 pb-0 px-1 u-pointer--cursor u-mouse-hover-color"
+            class="card pt-1 pb-0 px-1 u-pointer--cursor u-mouse-hover-color"
             :class="{ 'border border-3 border-secondary': emotion === 1 }"
             @click="emotion = 1"
           >
@@ -55,7 +55,7 @@ import { EMOTION_MESSAGE } from '../../config';
             </div>
           </div>
           <div
-            class="emotion-wrap--unit card pt-1 pb-0 px-1 u-pointer--cursor u-mouse-hover-color"
+            class="card pt-1 pb-0 px-1 u-pointer--cursor u-mouse-hover-color"
             :class="{ 'border border-3 border-secondary': emotion === 2 }"
             @click="emotion = 2"
           >
