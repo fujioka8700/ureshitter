@@ -2,6 +2,7 @@
 import LittleHappy from '../../../images/little-happy.svg';
 import UsuallyHappy from '../../../images/usually-happy.svg';
 import VeryHappy from '../../../images/very-happy.svg';
+import { EMOTION_MESSAGE } from '../../config';
 </script>
 
 <template>
@@ -26,45 +27,45 @@ import VeryHappy from '../../../images/very-happy.svg';
 
         <div class="emotion-wrap mt-3 d-flex justify-content-between">
           <div
-            class="emotion-wrap--unit card pt-1 pb-0 px-1"
+            class="card pt-1 pb-0 px-1 u-pointer--cursor u-mouse-hover-color"
             :class="{ 'border border-3 border-secondary': emotion === 0 }"
             @click="emotion = 0"
           >
             <img
               :src="LittleHappy"
-              alt="少しうれしい画像"
-              class="card-img-top bg-secondary bg-opacity-25 rounded-1"
+              alt="少しうれしい顔"
+              class="card-img-top u-bg-little-happy bg-opacity-25 rounded-1"
             />
             <div class="card-body p-0">
-              <p class="card-text text-center">少しうれしい</p>
+              <p class="card-text text-center">{{ EMOTION_MESSAGE[0] }}</p>
             </div>
           </div>
           <div
-            class="emotion-wrap--unit card pt-1 pb-0 px-1"
+            class="card pt-1 pb-0 px-1 u-pointer--cursor u-mouse-hover-color"
             :class="{ 'border border-3 border-secondary': emotion === 1 }"
             @click="emotion = 1"
           >
             <img
               :src="UsuallyHappy"
-              alt="うれしい画像"
-              class="card-img-top bg-secondary bg-opacity-25 rounded-1"
+              alt="うれしい顔"
+              class="card-img-top u-bg-usually-happy bg-opacity-25 rounded-1"
             />
             <div class="card-body p-0 position-relative">
-              <p class="card-text text-center">うれしい</p>
+              <p class="card-text text-center">{{ EMOTION_MESSAGE[1] }}</p>
             </div>
           </div>
           <div
-            class="emotion-wrap--unit card pt-1 pb-0 px-1"
+            class="card pt-1 pb-0 px-1 u-pointer--cursor u-mouse-hover-color"
             :class="{ 'border border-3 border-secondary': emotion === 2 }"
             @click="emotion = 2"
           >
             <img
               :src="VeryHappy"
-              alt="すごくうれしい画像"
-              class="card-img-top bg-secondary bg-opacity-25 rounded-1"
+              alt="すごくうれしい顔"
+              class="card-img-top u-bg-very-happy bg-opacity-25 rounded-1"
             />
             <div class="card-body p-0">
-              <p class="card-text text-center">すごくうれしい</p>
+              <p class="card-text text-center">{{ EMOTION_MESSAGE[2] }}</p>
             </div>
           </div>
         </div>
@@ -106,19 +107,23 @@ export default {
   },
   methods: {
     async postMessage() {
-      const res = await axios
+      let post_success_content;
+
+      const response = await axios
         .post('/api/messages', {
           name: this.name,
           emotion: this.emotion,
           message: this.message,
         })
         .then(function (response) {
-          alert('投稿しました。');
+          post_success_content = response;
+
           return false;
         })
         .catch(function (error) {
           let errors = {};
 
+          // Laravelから返ってきたバリデーションエラー内容を取り出す
           for (let key in error.response.data.errors) {
             errors[key] = error.response.data.errors[key][0];
           }
@@ -126,20 +131,32 @@ export default {
           return errors;
         });
 
-      // 名前のバリデーションエラー内容を削除する
-      if (this.error_messages.name) {
-        delete this.error_messages.name;
-      }
+      this.showValidationErrors(response);
 
-      // うれしかったことのバリデーションエラー内容を削除する
-      if (this.error_messages.message) {
-        delete this.error_messages.message;
-      }
+      this.checkForValidationErrors(response, post_success_content);
 
-      // バリデーションエラー内容を表示する
-      if (res) {
-        this.error_messages = res;
+      return false;
+    },
+    showValidationErrors(response) {
+      if (Object.keys(response).length !== 0) {
+        this.error_messages = response;
       }
+    },
+    checkForValidationErrors(response, content) {
+      if (Object.keys(response).length === 0) {
+        this.goToPostSuccessPage(content);
+      }
+    },
+    goToPostSuccessPage(content) {
+      this.$router.push({
+        name: 'success',
+        query: {
+          name: content.data.name,
+          message: content.data.message,
+          emotion: content.data.emotion,
+          status: content.status,
+        },
+      });
     },
   },
 };

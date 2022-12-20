@@ -6,7 +6,7 @@
         :class="current_page == 1 ? 'disabled' : ''"
         @click="changePage(current_page - 1)"
       >
-        <span class="page-link">«</span>
+        <span class="page-link u-pointer--cursor">«</span>
       </li>
       <li
         v-for="page in frontPageRange"
@@ -15,7 +15,7 @@
         :class="isCurrent(page) ? 'active' : 'inactive'"
         class="page-item"
       >
-        <span class="page-link">{{ page }}</span>
+        <span class="page-link u-pointer--cursor">{{ page }}</span>
       </li>
       <li v-show="front_dot" class="page-item disabled inactive">
         <span class="page-link">...</span>
@@ -27,7 +27,7 @@
         :class="isCurrent(page) ? 'active' : 'inactive'"
         class="page-item"
       >
-        <span class="page-link">{{ page }}</span>
+        <span class="page-link u-pointer--cursor">{{ page }}</span>
       </li>
       <li v-show="end_dot" class="page-item disabled inactive">
         <span class="page-link">...</span>
@@ -39,14 +39,14 @@
         :class="isCurrent(page) ? 'active' : 'inactive'"
         class="page-item"
       >
-        <span class="page-link">{{ page }}</span>
+        <span class="page-link u-pointer--cursor">{{ page }}</span>
       </li>
       <li
         class="page-item inactive"
         :class="current_page >= last_page ? 'disabled' : ''"
         @click="changePage(current_page + 1)"
       >
-        <span class="page-link">»</span>
+        <span class="page-link u-pointer--cursor">»</span>
       </li>
     </ul>
   </div>
@@ -75,11 +75,13 @@ export default {
         this.end_dot = false;
         return this.calRange(1, this.last_page);
       }
+
       return this.calRange(1, 2);
     },
     middlePageRange() {
       let start = '';
       let end = '';
+
       if (!this.sizeCheck) return [];
       if (this.current_page <= this.range) {
         start = 3;
@@ -97,16 +99,19 @@ export default {
         this.front_dot = true;
         this.end_dot = true;
       }
+
       return this.calRange(start, end);
     },
     endPageRange() {
       if (!this.sizeCheck) return [];
+
       return this.calRange(this.last_page - 1, this.last_page);
     },
     sizeCheck() {
       if (this.last_page <= this.range + 2) {
         return false;
       }
+
       return true;
     },
   },
@@ -120,12 +125,16 @@ export default {
       this.messages = messages.data;
 
       this.$emit('someMessages', this.messages);
+
+      return false;
     },
     calRange(start, end) {
       const range = [];
+
       for (let i = start; i <= end; i++) {
         range.push(i);
       }
+
       return range;
     },
     changePage(page) {
@@ -133,6 +142,8 @@ export default {
         this.current_page = page;
         this.getMessages();
       }
+
+      return false;
     },
     isCurrent(page) {
       return page === this.current_page;
@@ -140,5 +151,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped></style>
