@@ -11,6 +11,10 @@
         :message="message"
         :name="name"
       />
+      <div class="mt-4 d-flex justify-content-around">
+        <TweetButton :twitterText="twitterText" :originURL="originURL" />
+        <TopButton />
+      </div>
     </div>
   </div>
 </template>
@@ -24,10 +28,14 @@ import { EMOTION_MESSAGE, EMOTION_BGCOLOR } from '../../config';
 
 <script>
 import MessageCard from '../modules/MessageCard.vue';
+import TweetButton from '../modules/TweetButton.vue';
+import TopButton from '../modules/TopButton.vue';
 
 export default {
   components: {
     MessageCard,
+    TweetButton,
+    TopButton,
   },
   props: {
     id: {
@@ -44,6 +52,16 @@ export default {
       imgSrc: '',
       bgColor: '',
     };
+  },
+  computed: {
+    twitterText() {
+      return `【${this.emotionMessage}】${this.message}+-+${this.name}`;
+    },
+    originURL() {
+      const uri = new URL(window.location.href);
+
+      return uri.origin;
+    },
   },
   created() {
     // デザインを作成するため、仮のデータを作成する。
