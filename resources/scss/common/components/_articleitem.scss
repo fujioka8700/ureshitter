@@ -1,9 +1,9 @@
-.c-article {
-  .article-item {
-    height: 100px;
-  }
-
+.c-article-item {
   .article-message {
     height: 70%;
+  }
+
+  .border-end__remove {
+    border: 0 !important;
   }
 }

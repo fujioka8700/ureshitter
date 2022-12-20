@@ -1,15 +1,8 @@
-<script setup>
-import LittleHappy from '../../../images/little-happy.svg';
-import UsuallyHappy from '../../../images/usually-happy.svg';
-import VeryHappy from '../../../images/very-happy.svg';
-import { CREATED, EMOTION_MESSAGE, EMOTION_BGCOLOR } from '../../config';
-</script>
-
 <template>
-  <div class="p-thesuccess main-background" id="p-thesuccess">
+  <div class="p-message-item main-background">
     <div class="container">
       <div class="text-center pt-4 pb-4">
-        <span>投稿できました。</span>
+        <span>{{ name }} さんの、投稿です。</span>
       </div>
       <MessageCard
         :imgSrc="imgSrc"
@@ -26,6 +19,13 @@ import { CREATED, EMOTION_MESSAGE, EMOTION_BGCOLOR } from '../../config';
   </div>
 </template>
 
+<script setup>
+import LittleHappy from '../../../images/little-happy.svg';
+import UsuallyHappy from '../../../images/usually-happy.svg';
+import VeryHappy from '../../../images/very-happy.svg';
+import { EMOTION_MESSAGE, EMOTION_BGCOLOR } from '../../config';
+</script>
+
 <script>
 import MessageCard from '../modules/MessageCard.vue';
 import TweetButton from '../modules/TweetButton.vue';
@@ -37,6 +37,12 @@ export default {
     TweetButton,
     TopButton,
   },
+  props: {
+    id: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
       name: '',
@@ -47,13 +53,6 @@ export default {
       bgColor: '',
     };
   },
-  created() {
-    this.goToNotfoudInsteadOfSuccess();
-
-    this.savePostData();
-
-    this.iconType();
-  },
   computed: {
     twitterText() {
       return `【${this.emotionMessage}】${this.message}+-+${this.name}`;
@@ -63,6 +62,14 @@ export default {
 
       return uri.origin;
     },
+  },
+  created() {
+    // デザインを作成するため、仮のデータを作成する。
+    this.name = '名無し';
+    this.message = '晴れた良い天気でよかったです。';
+    this.emotion = 2;
+
+    this.iconType();
   },
   methods: {
     iconType() {
@@ -87,18 +94,6 @@ export default {
       }
 
       return false;
-    },
-    goToNotfoudInsteadOfSuccess() {
-      const status = parseInt(this.$route.query.status);
-
-      if (status !== CREATED) {
-        this.$router.push({ path: 'notfound' });
-      }
-    },
-    savePostData() {
-      this.name = this.$route.query.name;
-      this.message = this.$route.query.message;
-      this.emotion = parseInt(this.$route.query.emotion);
     },
   },
 };

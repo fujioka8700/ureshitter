@@ -7,10 +7,19 @@ window._ = _;
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
+import { getCookieValue } from './util';
 import axios from 'axios';
 window.axios = axios;
 
+// Ajaxリクエストであることを示すヘッダーを付与する
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+window.axios.interceptors.request.use((config) => {
+  // クッキーからトークンを取り出してヘッダーに添付する
+  config.headers['X-XSRF-TOKEN'] = getCookieValue('XSRF-TOKEN');
+
+  return config;
+});
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -33,10 +42,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     enabledTransports: ['ws', 'wss'],
 // });
 
-// Bootstrapを利用する
+// Bootstrap5 のリファレンスはこちら。
 // https://bootstrap-guide.com/
 import * as bootstrap from 'bootstrap';
-
-// bootstrap iconsを利用する
-// https://icons.getbootstrap.com/
-import 'bootstrap-icons/font/bootstrap-icons.css';
