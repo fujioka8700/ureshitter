@@ -11,16 +11,13 @@ import { CREATED, EMOTION_MESSAGE, EMOTION_BGCOLOR } from '../../config';
       <div class="text-center pt-4 pb-4">
         <span>投稿できました。</span>
       </div>
-      <div class="d-flex justify-content-center">
-        <div class="card" style="width: 18rem">
-          <img :src="imgSrc" class="m-2" :class="bgColor" alt="" />
-          <span class="text-center">{{ emotionMessage }}</span>
-          <div class="card-body">
-            <p class="card-text">{{ message }}</p>
-            <div class="text-end">{{ name }} さん</div>
-          </div>
-        </div>
-      </div>
+      <MessageCard
+        :imgSrc="imgSrc"
+        :bgColor="bgColor"
+        :emotionMessage="emotionMessage"
+        :message="message"
+        :name="name"
+      />
       <div class="mt-4 d-flex justify-content-around">
         <a
           href="https://twitter.com/share?ref_src=twsrc%5Etfw"
@@ -44,7 +41,12 @@ import { CREATED, EMOTION_MESSAGE, EMOTION_BGCOLOR } from '../../config';
 </template>
 
 <script>
+import MessageCard from '../modules/MessageCard.vue';
+
 export default {
+  components: {
+    MessageCard,
+  },
   data() {
     return {
       name: '',

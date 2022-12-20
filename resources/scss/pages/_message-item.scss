@@ -1,0 +1,10 @@
+@use '../global' as g;
+
+.p-message-item {
+  padding-top: 60px;
+
+  @include g.pc() {
+    width: 540px;
+    margin: 0 auto;
+  }
+}

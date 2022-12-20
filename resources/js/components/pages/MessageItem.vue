@@ -1,8 +1,9 @@
 <template>
-  <div class="p-message-item">
-    <div class="item-title">
-      <p>MessageItem</p>
-      <p>{{ id }}</p>
+  <div class="p-message-item main-background">
+    <div class="container">
+      <div class="text-center pt-4 pb-4">
+        <span>名無しさんの、投稿です。</span>
+      </div>
     </div>
   </div>
 </template>
@@ -22,11 +23,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.p-message-item {
-  .item-title {
-    padding-top: 60px;
-  }
-}
-</style>
