@@ -20,11 +20,7 @@ import { CREATED, EMOTION_MESSAGE, EMOTION_BGCOLOR } from '../../config';
       />
       <div class="mt-4 d-flex justify-content-around">
         <TweetButton :twitterText="twitterText" :originURL="originURL" />
-        <button type="button" class="btn btn-secondary">
-          <router-link :to="{ name: 'home' }" class="text-decoration-none">
-            <span class="text-white">トップ画面に戻る</span>
-          </router-link>
-        </button>
+        <TopButton />
       </div>
     </div>
   </div>
@@ -33,11 +29,13 @@ import { CREATED, EMOTION_MESSAGE, EMOTION_BGCOLOR } from '../../config';
 <script>
 import MessageCard from '../modules/MessageCard.vue';
 import TweetButton from '../modules/TweetButton.vue';
+import TopButton from '../modules/TopButton.vue';
 
 export default {
   components: {
     MessageCard,
     TweetButton,
+    TopButton,
   },
   data() {
     return {

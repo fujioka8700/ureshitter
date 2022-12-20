@@ -4,15 +4,17 @@
       <span>404 ページを表示できません。</span>
     </div>
     <div class="text-center">
-      <button type="button" class="btn btn-secondary">
-        <router-link :to="{ name: 'home' }" class="text-decoration-none">
-          <span class="text-white">トップ画面に戻る</span>
-        </router-link>
-      </button>
+      <TopButton />
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import TopButton from '../modules/TopButton.vue';
+
+export default {
+  components: {
+    TopButton,
+  },
+};
 </script>
