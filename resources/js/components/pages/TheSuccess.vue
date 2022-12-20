@@ -19,17 +19,7 @@ import { CREATED, EMOTION_MESSAGE, EMOTION_BGCOLOR } from '../../config';
         :name="name"
       />
       <div class="mt-4 d-flex justify-content-around">
-        <a
-          href="https://twitter.com/share?ref_src=twsrc%5Etfw"
-          class="twitter-share-button"
-          :data-text="twitterText"
-          :data-url="originURL"
-          data-size="large"
-          data-hashtags="Ureshitter"
-          data-lang="ja"
-          data-show-count="false"
-          >Tweet
-        </a>
+        <TweetButton :twitterText="twitterText" :originURL="originURL" />
         <button type="button" class="btn btn-secondary">
           <router-link :to="{ name: 'home' }" class="text-decoration-none">
             <span class="text-white">トップ画面に戻る</span>
@@ -42,10 +32,12 @@ import { CREATED, EMOTION_MESSAGE, EMOTION_BGCOLOR } from '../../config';
 
 <script>
 import MessageCard from '../modules/MessageCard.vue';
+import TweetButton from '../modules/TweetButton.vue';
 
 export default {
   components: {
     MessageCard,
+    TweetButton,
   },
   data() {
     return {
@@ -63,9 +55,6 @@ export default {
     this.savePostData();
 
     this.iconType();
-  },
-  mounted() {
-    this.twitterExternalScript();
   },
   computed: {
     twitterText() {
@@ -112,12 +101,6 @@ export default {
       this.name = this.$route.query.name;
       this.message = this.$route.query.message;
       this.emotion = parseInt(this.$route.query.emotion);
-    },
-    twitterExternalScript() {
-      let scriptEl = document.createElement('script');
-
-      scriptEl.setAttribute('src', 'https://platform.twitter.com/widgets.js');
-      document.getElementById('p-thesuccess').appendChild(scriptEl);
     },
   },
 };
