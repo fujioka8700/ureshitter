@@ -13,6 +13,7 @@ import { EMOTION_BGCOLOR } from '../../config';
         :class="{ 'border-end__remove': last }"
         @mouseover="mouseOverAction"
         @mouseleave="mouseLeaveAction"
+        @click="goToMessage"
       >
         <img
           :src="imgSrc"
@@ -43,6 +44,10 @@ export default {
     };
   },
   props: {
+    id: {
+      type: Number,
+      required: true,
+    },
     name: {
       type: String,
       required: true,
@@ -89,6 +94,9 @@ export default {
     },
     mouseLeaveAction() {
       this.messageMouseOver = false;
+    },
+    goToMessage() {
+      this.$router.push({ name: 'message', params: { id: this.id } });
     },
   },
 };

@@ -8,6 +8,7 @@
     <ul class="list-group erase-bullet">
       <li v-for="(message, index) in messages" :key="message">
         <ArticleItem
+          :id="message.id"
           :name="message.name"
           :emotion="message.emotion"
           :message="message.message"
