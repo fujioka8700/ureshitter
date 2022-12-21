@@ -64,14 +64,21 @@ export default {
     },
   },
   created() {
-    // デザインを作成するため、仮のデータを作成する。
-    this.name = '名無し';
-    this.message = '晴れた良い天気でよかったです。';
-    this.emotion = 2;
-
-    this.iconType();
+    this.getMessage().then((result) => {
+      this.iconType();
+    });
   },
   methods: {
+    async getMessage() {
+      const result = await axios.get(`/api/messages/${this.id}`);
+      const message = result.data;
+
+      this.name = message.name;
+      this.message = message.message;
+      this.emotion = message.emotion;
+
+      return false;
+    },
     iconType() {
       switch (this.emotion) {
         case 0:
