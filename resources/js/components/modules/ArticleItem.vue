@@ -9,7 +9,7 @@ import { EMOTION_BGCOLOR } from '../../config';
   <article class="c-article-item">
     <div class="container">
       <div
-        class="pt-2 pb-2 border-bottom d-flex u-pointer--cursor"
+        class="pt-2 pb-2 border-bottom d-flex u-pointer--cursor message-height__max"
         :class="{ 'border-end__remove': last }"
         @mouseover="mouseOverAction"
         @mouseleave="mouseLeaveAction"
