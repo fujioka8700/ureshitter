@@ -56,7 +56,7 @@ export default {
   },
   computed: {
     twitterText() {
-      return `【${this.emotionMessage}】${this.message}+-+${this.name}`;
+      return `【${this.emotionMessage}】${this.message} ${this.name}`;
     },
     originURL() {
       const uri = new URL(window.location.href);
