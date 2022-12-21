@@ -12,7 +12,7 @@
         :name="name"
       />
       <div class="mt-4 d-flex justify-content-around">
-        <TweetButton :twitterText="twitterText" :originURL="originURL" />
+        <TweetButton :twitterText="twitterText" :originURL="originURL" v-if="ready" />
         <TopButton />
       </div>
     </div>
@@ -51,11 +51,12 @@ export default {
       emotion: null,
       imgSrc: '',
       bgColor: '',
+      ready: false,
     };
   },
   computed: {
     twitterText() {
-      return `【${this.emotionMessage}】${this.message}+-+${this.name}`;
+      return `【${this.emotionMessage}】${this.message} ${this.name}`;
     },
     originURL() {
       const uri = new URL(window.location.href);
@@ -66,6 +67,11 @@ export default {
   created() {
     this.getMessage().then((result) => {
       this.iconType();
+
+      // 非同期の処理が完了し、
+      // ツイートボタンのコンポーネントに渡すデータが揃ってから、
+      // ツイートボタンを表示するようにしている。
+      this.ready = true;
     });
   },
   methods: {
