@@ -61,7 +61,14 @@ class MessageController extends Controller
    */
   public function show($id)
   {
-    //
+    $message = Message::find($id);
+
+    return response()->json(
+      $message,
+      200,
+      ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],
+      JSON_UNESCAPED_UNICODE
+    );
   }
 
   /**

@@ -138,6 +138,8 @@ class MessageControllerTest extends TestCase
 
   /**
    * うれしかったこと141文字以上ならエラーメッセージを返す
+   *
+   * @return void
    */
   public function test_error_over_141_characters_in_message()
   {
@@ -160,5 +162,26 @@ class MessageControllerTest extends TestCase
           'message' => $error_messages,
         ]
       ]);
+  }
+
+  /**
+   * メッセージ1つ、Jsonを返す
+   *
+   * @return void
+   */
+  public function test_return_one_message()
+  {
+    Message::factory()->create();
+
+    $message = Message::first();
+
+    $response = $this->getJson('api/messages/' . $message->id);
+
+    $response->assertStatus(200)->assertJson([
+      'id' => $message->id,
+      'name' => $message->name,
+      'emotion' => $message->emotion,
+      'message' => $message->message,
+    ]);
   }
 }

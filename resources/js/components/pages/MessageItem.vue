@@ -12,7 +12,7 @@
         :name="name"
       />
       <div class="mt-4 d-flex justify-content-around">
-        <TweetButton :twitterText="twitterText" :originURL="originURL" />
+        <TweetButton :twitterText="twitterText" :originURL="originURL" v-if="ready" />
         <TopButton />
       </div>
     </div>
@@ -51,11 +51,12 @@ export default {
       emotion: null,
       imgSrc: '',
       bgColor: '',
+      ready: false,
     };
   },
   computed: {
     twitterText() {
-      return `【${this.emotionMessage}】${this.message}+-+${this.name}`;
+      return `【${this.emotionMessage}】${this.message} ${this.name}`;
     },
     originURL() {
       const uri = new URL(window.location.href);
@@ -64,14 +65,26 @@ export default {
     },
   },
   created() {
-    // デザインを作成するため、仮のデータを作成する。
-    this.name = '名無し';
-    this.message = '晴れた良い天気でよかったです。';
-    this.emotion = 2;
+    this.getMessage().then((result) => {
+      this.iconType();
 
-    this.iconType();
+      // 非同期の処理が完了し、
+      // ツイートボタンのコンポーネントに渡すデータが揃ってから、
+      // ツイートボタンを表示するようにしている。
+      this.ready = true;
+    });
   },
   methods: {
+    async getMessage() {
+      const result = await axios.get(`/api/messages/${this.id}`);
+      const message = result.data;
+
+      this.name = message.name;
+      this.message = message.message;
+      this.emotion = message.emotion;
+
+      return false;
+    },
     iconType() {
       switch (this.emotion) {
         case 0:
