@@ -2,4 +2,11 @@
   .emotion-wrap {
     height: 140px;
   }
+
+  .password-area--body {
+    .password__input {
+      display: inline;
+      width: auto;
+    }
+  }
 }
