@@ -22,11 +22,13 @@ class MessageControllerTest extends TestCase
     $requestName = $this->faker->name;
     $requestEmotion = $this->faker->numberBetween(0, 2);
     $requestMessage = $this->faker->realText(50, 2);
+    $requestPassword = ''; // 空文字にした場合、Controller内で「1234」に設定している。
 
     $response = $this->postJson('/api/messages', [
       'name' => $requestName,
       'emotion' => $requestEmotion,
-      'message' => $requestMessage
+      'message' => $requestMessage,
+      'password' => $requestPassword,
     ]);
 
     $response->assertStatus(201)->assertJson([

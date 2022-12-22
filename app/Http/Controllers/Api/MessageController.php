@@ -6,6 +6,7 @@ use App\Models\Message;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MessagePostRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class MessageController extends Controller
 {
@@ -39,10 +40,16 @@ class MessageController extends Controller
       $request->name = '名無し';
     };
 
+    // パスワードの変更が無ければ、「1234」にする
+    if (is_null($request->password)) {
+      $request->password = '1234';
+    }
+
     $message = Message::create([
       'name' => $request->name,
       'emotion' => $request->emotion,
-      'message' => $request->message
+      'message' => $request->message,
+      'password' => Hash::make($request->password),
     ]);
 
     return response()->json(

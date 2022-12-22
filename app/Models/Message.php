@@ -12,6 +12,9 @@ class Message extends Model
   protected $fillable = [
     'name',
     'emotion',
-    'message'
+    'message',
+    'password',
   ];
+
+  protected $hidden = ['password'];
 }
