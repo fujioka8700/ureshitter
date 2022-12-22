@@ -11,10 +11,20 @@
         :message="message"
         :name="name"
       />
+      <!-- End of post content -->
+
       <div class="mt-4 d-flex justify-content-around">
-        <TweetButton :twitterText="twitterText" :originURL="originURL" v-if="ready" />
+        <div>
+          <TweetButton :twitterText="twitterText" :originURL="originURL" v-if="ready" />
+          <div class="mt-5">
+            <button type="button" class="btn btn-light border" @click="deleteMessage">
+              削除する
+            </button>
+          </div>
+        </div>
         <TopButton />
       </div>
+      <!-- End of button content -->
     </div>
   </div>
 </template>
@@ -107,6 +117,11 @@ export default {
       }
 
       return false;
+    },
+    deleteMessage() {
+      const inputPassword = window.prompt('削除キーを入力してください。', '');
+
+      // ここから laravel api destroy と繋ぐ。
     },
   },
 };
