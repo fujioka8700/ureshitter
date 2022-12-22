@@ -186,4 +186,56 @@ class MessageControllerTest extends TestCase
       'message' => $message->message,
     ]);
   }
+
+  /**
+   * メッセージ1つを削除する(パスワードが一致しており、削除が成功した場合)
+   *
+   * @return void
+   */
+  public function test_successfully_deleted_one_message()
+  {
+    Message::factory()->create();
+    $message = Message::first();
+
+    $requestPassword = '1234'; // 初期設定の「1234」を送信する。
+
+    // 削除するレコードは1件のみ。
+    // それ以上の数値が返ってきた場合、複数のレコードが削除されてしまっている。
+    $deletedItems    = 1;
+
+    $response = $this->deleteJson('api/messages/' . $message->id, [
+      'password' => $requestPassword,
+    ]);
+
+    $response->assertStatus(200)->assertJson([
+      'deleteCount' => $deletedItems,
+    ]);
+  }
+
+  /**
+   * メッセージ1つを削除する(パスワードが一致しておらず、削除が失敗した場合)
+   *
+   * @return void
+   */
+  public function test_failed_to_delete_one_message()
+  {
+    Message::factory()->create();
+    $message = Message::first();
+
+    // 削除できるパスワードの、初期設定値は「1234」。
+    // 8桁のパスワードを送信するため、パスワードは一致しない。
+    $requestPassword = $this->faker()->randomNumber(8, true);
+
+    // 削除されるレコードは0件。
+    // それ以上の数値が返ってきた場合、複数のレコードが削除されてしまっている。
+    $deletedItems    = 0;
+
+    $response = $this->deleteJson('api/messages/' . $message->id, [
+      'password' => $requestPassword,
+    ]);
+
+    $response->assertStatus(200)->assertJson([
+      'deleteCount' => $deletedItems,
+    ]);
+  }
 }

@@ -98,6 +98,25 @@ class MessageController extends Controller
    */
   public function destroy($id)
   {
-    //
+    $message = Message::find($id);
+    $messagePassword = $message->password;
+    $requestPassword = request()->password;
+
+    $passwordMatch = Hash::check($requestPassword, $messagePassword);
+
+    $deletedCount = json_encode([], JSON_FORCE_OBJECT);
+
+    if ($passwordMatch === true) {
+      $deletedCount = ['deleteCount' => $message->destroy($message->id)];
+    } else {
+      $deletedCount = ['deleteCount' => 0];
+    }
+
+    return response()->json(
+      $deletedCount,
+      200,
+      ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],
+      JSON_UNESCAPED_UNICODE
+    );
   }
 }
