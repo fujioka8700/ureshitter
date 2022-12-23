@@ -118,10 +118,29 @@ export default {
 
       return false;
     },
-    deleteMessage() {
+    async deleteMessage() {
       const inputPassword = window.prompt('削除キーを入力してください。', '');
 
-      // ここから laravel api destroy と繋ぐ。
+      const response = await axios.delete(`/api/messages/${this.id}`, {
+        params: {
+          password: inputPassword,
+        },
+      });
+
+      this.transitionIfDeleted(response);
+    },
+    transitionIfDeleted(confirmResponse) {
+      if (confirmResponse.data.deleteCount === 0) {
+        alert('削除できませんでした。');
+        return false;
+      }
+
+      if (confirmResponse.data.deleteCount === 1) {
+        alert('削除しました。');
+        this.$router.push({ name: 'home' });
+      }
+
+      return true;
     },
   },
 };

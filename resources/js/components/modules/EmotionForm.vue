@@ -127,6 +127,7 @@ export default {
           name: this.name,
           emotion: this.emotion,
           message: this.message,
+          password: this.password,
         })
         .then(function (response) {
           post_success_content = response;
