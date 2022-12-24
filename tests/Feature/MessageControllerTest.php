@@ -184,6 +184,7 @@ class MessageControllerTest extends TestCase
       'name' => $message->name,
       'emotion' => $message->emotion,
       'message' => $message->message,
+      'created_at' => $message->created_at->toISOString(),
     ]);
   }
 
