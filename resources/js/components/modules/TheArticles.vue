@@ -12,6 +12,7 @@
           :name="message.name"
           :emotion="message.emotion"
           :message="message.message"
+          :created_at="message.created_at"
           :last="index === messages.length - 1"
         />
       </li>

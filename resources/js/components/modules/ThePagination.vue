@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div class="c-the-pagination">
     <ul class="pagination">
       <li
         class="page-item inactive"
         :class="current_page == 1 ? 'disabled' : ''"
         @click="changePage(current_page - 1)"
       >
-        <span class="page-link u-pointer--cursor">«</span>
+        <span class="page-link u-pointer--cursor page-link__local">«</span>
       </li>
       <li
         v-for="page in frontPageRange"
@@ -15,10 +15,10 @@
         :class="isCurrent(page) ? 'active' : 'inactive'"
         class="page-item"
       >
-        <span class="page-link u-pointer--cursor">{{ page }}</span>
+        <span class="page-link u-pointer--cursor page-link__local">{{ page }}</span>
       </li>
       <li v-show="front_dot" class="page-item disabled inactive">
-        <span class="page-link">...</span>
+        <span class="page-link page-link__local">...</span>
       </li>
       <li
         v-for="page in middlePageRange"
@@ -27,10 +27,10 @@
         :class="isCurrent(page) ? 'active' : 'inactive'"
         class="page-item"
       >
-        <span class="page-link u-pointer--cursor">{{ page }}</span>
+        <span class="page-link u-pointer--cursor page-link__local">{{ page }}</span>
       </li>
       <li v-show="end_dot" class="page-item disabled inactive">
-        <span class="page-link">...</span>
+        <span class="page-link page-link__local">...</span>
       </li>
       <li
         v-for="page in endPageRange"
@@ -39,14 +39,14 @@
         :class="isCurrent(page) ? 'active' : 'inactive'"
         class="page-item"
       >
-        <span class="page-link u-pointer--cursor">{{ page }}</span>
+        <span class="page-link u-pointer--cursor page-link__local">{{ page }}</span>
       </li>
       <li
         class="page-item inactive"
         :class="current_page >= last_page ? 'disabled' : ''"
         @click="changePage(current_page + 1)"
       >
-        <span class="page-link u-pointer--cursor">»</span>
+        <span class="page-link u-pointer--cursor page-link__local">»</span>
       </li>
     </ul>
   </div>

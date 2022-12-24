@@ -18,6 +18,7 @@ return new class extends Migration
       $table->string('name');
       $table->integer('emotion');
       $table->text('message');
+      $table->string('password');
       $table->timestamps();
     });
   }

@@ -1,5 +1,8 @@
 import './bootstrap';
 
+import { DateTime } from 'luxon';
+window.DateTime = DateTime;
+
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router/index.js';
