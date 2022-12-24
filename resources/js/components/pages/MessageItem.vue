@@ -16,7 +16,7 @@
       />
       <!-- End of post content -->
 
-      <div class="mt-4 d-flex justify-content-around">
+      <div class="mt-4 pb-2 d-flex justify-content-around">
         <div>
           <TweetButton :twitterText="twitterText" :originURL="originURL" v-if="ready" />
           <div class="mt-5">
