@@ -4,7 +4,9 @@
       <div class="text-center pt-4 pb-4">
         <span>{{ name }} さんの、投稿です。</span>
       </div>
-      <div class="mb-2 text-end writing-time-text__secondary">2022年12月24日 10:20</div>
+      <div class="mb-2 text-end writing-time-text__secondary">
+        {{ writingTime }}
+      </div>
       <MessageCard
         :imgSrc="imgSrc"
         :bgColor="bgColor"
@@ -60,12 +62,18 @@ export default {
       message: '',
       emotionMessage: '',
       emotion: null,
+      created_at: '',
       imgSrc: '',
       bgColor: '',
       ready: false,
     };
   },
   computed: {
+    writingTime() {
+      const writingTime = DateTime.fromJSDate(new Date(this.created_at));
+
+      return writingTime.toFormat('yyyy年MM月dd日 HH:mm');
+    },
     twitterText() {
       return `【${this.emotionMessage}】${this.message} ${this.name}`;
     },
@@ -93,6 +101,7 @@ export default {
       this.name = message.name;
       this.message = message.message;
       this.emotion = message.emotion;
+      this.created_at = message.created_at;
 
       return false;
     },

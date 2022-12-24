@@ -77,7 +77,7 @@ export default {
     writingTime() {
       const writingTime = DateTime.fromJSDate(new Date(this.created_at));
 
-      return writingTime.toFormat('yyyy年MM月dd日 hh:mm');
+      return writingTime.toFormat('yyyy年MM月dd日 HH:mm');
     },
   },
   methods: {
