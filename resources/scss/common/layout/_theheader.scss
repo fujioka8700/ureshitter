@@ -2,6 +2,10 @@
   height: 60px;
   z-index: 10;
 
+  .logo-wrap {
+    max-width: 140px;
+  }
+
   .header-logo {
     font-family: 'Acme', sans-serif;
     font-weight: 400;

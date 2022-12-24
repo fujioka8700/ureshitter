@@ -86,6 +86,18 @@ import { EMOTION_MESSAGE } from '../../config';
         </div>
         <!-- End of textarea -->
 
+        <div class="mb-3 mt-3 password-area--body">
+          <label for="InputPassword" class="form-label me-2">削除キー</label>
+          <input
+            type="password"
+            class="form-control password__input"
+            id="InputPassword"
+            placeholder="1234"
+            v-model="password"
+          />
+        </div>
+        <!-- End of password area -->
+
         <div class="mt-3 text-center border-bottom pb-3">
           <button type="submit" class="btn btn-primary">投稿する</button>
         </div>
@@ -103,6 +115,7 @@ export default {
       emotion: 1,
       message: '',
       error_messages: {},
+      password: '',
     };
   },
   methods: {
@@ -114,6 +127,7 @@ export default {
           name: this.name,
           emotion: this.emotion,
           message: this.message,
+          password: this.password,
         })
         .then(function (response) {
           post_success_content = response;
