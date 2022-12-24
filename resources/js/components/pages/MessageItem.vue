@@ -78,9 +78,7 @@ export default {
       return `【${this.emotionMessage}】${this.message} ${this.name}`;
     },
     originURL() {
-      const uri = new URL(window.location.href);
-
-      return uri.origin;
+      return window.location.href;
     },
   },
   created() {
