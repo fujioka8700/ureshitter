@@ -4,6 +4,7 @@
       <div class="text-center pt-4 pb-4">
         <span>{{ name }} さんの、投稿です。</span>
       </div>
+      <div class="mb-2 text-end writing-time-text__secondary">2022年12月24日 10:20</div>
       <MessageCard
         :imgSrc="imgSrc"
         :bgColor="bgColor"

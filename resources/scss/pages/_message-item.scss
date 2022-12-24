@@ -3,6 +3,12 @@
 .p-message-item {
   padding-top: 60px;
 
+  .writing-time-text__secondary {
+    width: 18rem;
+    margin: 0 auto;
+    font-size: 0.8em;
+  }
+
   @include g.pc() {
     width: 540px;
     margin: 0 auto;
