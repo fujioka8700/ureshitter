@@ -45,3 +45,10 @@ window.axios.interceptors.request.use((config) => {
 // Bootstrap5 のリファレンスはこちら。
 // https://bootstrap-guide.com/
 import * as bootstrap from 'bootstrap';
+
+/**
+ * 日付オブジェクトを取得後、日付の加工にluxonを使用。
+ * (jsonにはISO8601形式で送られてくる)
+ */
+import { DateTime } from 'luxon';
+window.DateTime = DateTime;
