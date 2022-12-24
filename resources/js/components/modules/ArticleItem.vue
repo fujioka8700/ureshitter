@@ -25,6 +25,7 @@ import { EMOTION_BGCOLOR } from '../../config';
           <p class="mb-0 text-primary" :class="{ 'text-decoration-underline': messageMouseOver }">
             {{ name }} さん
           </p>
+          <span class="writing-time-text">{{ writingTime }}</span>
           <div class="article-message overflow-auto text-break">
             <p>{{ message }}</p>
           </div>
@@ -60,6 +61,10 @@ export default {
       type: String,
       required: true,
     },
+    created_at: {
+      type: String,
+      required: true,
+    },
     last: {
       type: Boolean,
       required: true,
@@ -67,6 +72,13 @@ export default {
   },
   created() {
     this.iconType();
+  },
+  computed: {
+    writingTime() {
+      const writingTime = DateTime.fromJSDate(new Date(this.created_at));
+
+      return writingTime.toFormat('yyyy年MM月dd日 hh:mm');
+    },
   },
   methods: {
     iconType() {

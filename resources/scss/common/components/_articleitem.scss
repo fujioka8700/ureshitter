@@ -1,6 +1,6 @@
 .c-article-item {
   .article-message {
-    height: 70%;
+    height: 50%;
   }
 
   .border-end__remove {
@@ -9,5 +9,9 @@
 
   .message-height__max {
     max-height: 117px;
+  }
+
+  .writing-time-text {
+    font-size: 0.8em;
   }
 }
