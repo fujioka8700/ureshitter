@@ -1,0 +1,15 @@
+.c-the-about-item {
+  .about--thumbnail {
+    width: 9em;
+    object-fit: cover;
+  }
+
+  .about--title {
+    font-size: 1.1em;
+    color: #008de2 !important;
+  }
+
+  .about--text {
+    font-size: 0.9em;
+  }
+}
