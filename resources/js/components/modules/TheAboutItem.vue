@@ -1,5 +1,5 @@
 <template>
-  <div class="c-the-about-item mb-4">
+  <div class="c-the-about-item pb-4">
     <div class="bg-white ps-sm-3 pt-sm-3 pb-sm-3">
       <h3 class="text-primary fw-normal ps-2 pt-2 pb-1 about--title">
         <slot name="title">ここにタイトルを表示します。</slot>
