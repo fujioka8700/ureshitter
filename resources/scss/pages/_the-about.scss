@@ -1,0 +1,11 @@
+@use '../global' as g;
+
+.p-the-about {
+  padding-top: 60px;
+  background: #faf9f5;
+
+  @include g.pc() {
+    width: 540px;
+    margin: 0 auto;
+  }
+}
