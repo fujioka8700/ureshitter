@@ -13,4 +13,22 @@
     line-height: 30px;
     margin-bottom: 0;
   }
+
+  .nav-link__color {
+    &:link {
+      color: #696969;
+    }
+
+    &:visited {
+      color: #696969;
+    }
+
+    &:hover {
+      color: #dcdcdc;
+    }
+
+    &:active {
+      color: #696969;
+    }
+  }
 }
