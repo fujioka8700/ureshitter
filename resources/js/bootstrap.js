@@ -42,8 +42,10 @@ window.axios.interceptors.request.use((config) => {
 //     enabledTransports: ['ws', 'wss'],
 // });
 
-// Bootstrap5 のリファレンスはこちら。
-// https://bootstrap-guide.com/
+/**
+ * Bootstrap5 のリファレンスはこちら。
+ * https://bootstrap-guide.com/
+ */
 import * as bootstrap from 'bootstrap';
 
 /**

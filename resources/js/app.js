@@ -8,3 +8,6 @@ const app = createApp(App);
 
 app.use(router);
 app.mount('#app');
+
+import { hamburgerToggle } from './util';
+hamburgerToggle();

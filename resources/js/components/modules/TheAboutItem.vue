@@ -18,7 +18,7 @@
 export default {
   props: {
     aboutThumbnail: {
-      type: Object,
+      type: String,
       required: true,
     },
   },
