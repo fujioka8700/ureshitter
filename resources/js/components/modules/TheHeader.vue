@@ -1,4 +1,5 @@
 <script setup>
+import HamburgerMenu from '../modules/HamburgerMenu.vue';
 import logo from '../../../images/logo.svg';
 </script>
 
@@ -43,24 +44,8 @@ import logo from '../../../images/logo.svg';
               </li>
             </ul>
           </div>
-          <div class="u-hamburger-menu">
-            <div class="d-block d-sm-none">
-              <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-
-              <nav class="globalMenuSp">
-                <ul>
-                  <li><a href="#">Menu1</a></li>
-                  <li><a href="#">Menu2</a></li>
-                  <li><a href="#">Menu3</a></li>
-                  <li><a href="#">Menu4</a></li>
-                  <li><a href="#">Menu5</a></li>
-                </ul>
-              </nav>
-            </div>
+          <div class="d-block d-sm-none">
+            <HamburgerMenu />
           </div>
         </div>
       </div>
