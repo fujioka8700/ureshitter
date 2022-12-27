@@ -60,6 +60,25 @@ const closeMenu = (hamburger, globalMenuSp) => {
 };
 
 /**
+ * 画面全体どこをタッチしても、メニューを閉じる
+ * @param {HTMLElement} hamburger ハンバーガーアイコンの要素
+ * @param {HTMLElement} globalMenuSp メニューの要素
+ */
+const closeMenuByTouch = (hamburger, globalMenuSp) => {
+  const appMainElement = document.querySelector('.app-main');
+
+  appMainElement.addEventListener('click', function () {
+    const hamburgerOpen = hamburger.classList.contains('active');
+    const menuOpen = globalMenuSp.classList.contains('active');
+
+    if (hamburgerOpen && menuOpen) {
+      hamburger.classList.remove('active');
+      globalMenuSp.classList.remove('active');
+    }
+  });
+};
+
+/**
  * ハンバーガーメニュー。
  * @return {boolean} ハンバーガーメニューが、設置出来たらfalseを返す
  */
@@ -70,6 +89,8 @@ export function hamburger() {
   menuDisplay(hamburger, globalMenuSp);
 
   closeMenu(hamburger, globalMenuSp);
+
+  closeMenuByTouch(hamburger, globalMenuSp);
 
   return false;
 }
