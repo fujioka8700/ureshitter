@@ -41,11 +41,18 @@
         </template>
       </TheAboutItem>
     </div>
+    <div class="text-center py-4">
+      <TopButton />
+    </div>
+    <div class="mt-3 pb-4 pt-1 border-top text-center text-secondary">
+      <small>Copyright &copy; fujioka. 2022</small>
+    </div>
   </div>
 </template>
 
 <script setup>
 import TheAboutItem from '../modules/TheAboutItem.vue';
+import TopButton from '../modules/TopButton.vue';
 import AboutHero from '../../../images/aboutHero.jpg';
 import AboutRecord from '../../../images/aboutRecord.png';
 import AboutShare from '../../../images/aboutShare.png';
