@@ -21,7 +21,7 @@ export function getCookieValue(searchKey) {
 }
 
 /**
- * ハンバーガーアイコンをクリックするとメニューを表示する
+ * ハンバーガーアイコンをタッチすると、メニューを表示する
  * @param {HTMLElement} hamburger ハンバーガーアイコンの要素
  * @param {HTMLElement} globalMenuSp メニューの要素
  */
@@ -38,7 +38,7 @@ const menuDisplay = (hamburger, globalMenuSp) => {
 };
 
 /**
- * メニュー項目のどれかクリックすると、メニューを閉じる
+ * メニュー項目のどれかタッチすると、メニューを閉じる
  * @param {HTMLElement} hamburger ハンバーガーアイコンの要素
  * @param {HTMLElement} globalMenuSp メニューの要素
  */
