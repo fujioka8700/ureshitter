@@ -26,17 +26,14 @@ export function getCookieValue(searchKey) {
 export function hamburgerToggle() {
   const hamburger = document.querySelector('.hamburger');
   const globalMenuSp = document.querySelector('.globalMenuSp');
-  const navList = document.getElementById('nav-list');
 
   hamburger.addEventListener('click', function () {
     this.classList.toggle('active');
 
     if (this.classList.contains('active')) {
       globalMenuSp.classList.add('active');
-      navList.style.pointerEvents = 'auto';
     } else {
       globalMenuSp.classList.remove('active');
-      navList.style.pointerEvents = 'none';
     }
   });
 }
