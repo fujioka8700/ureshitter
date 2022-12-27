@@ -21,12 +21,11 @@ export function getCookieValue(searchKey) {
 }
 
 /**
- * ハンバーガーメニューの表示を切り替える
+ * ハンバーガーアイコンをクリックするとメニューを表示する
+ * @param {HTMLElement} hamburger ハンバーガーアイコンの要素
+ * @param {HTMLElement} globalMenuSp メニューの要素
  */
-export function hamburgerToggle() {
-  const hamburger = document.querySelector('.hamburger');
-  const globalMenuSp = document.querySelector('.globalMenuSp');
-
+const menuDisplay = (hamburger, globalMenuSp) => {
   hamburger.addEventListener('click', function () {
     this.classList.toggle('active');
 
@@ -36,4 +35,41 @@ export function hamburgerToggle() {
       globalMenuSp.classList.remove('active');
     }
   });
+};
+
+/**
+ * メニュー項目のどれかクリックすると、メニューを閉じる
+ * @param {HTMLElement} hamburger ハンバーガーアイコンの要素
+ * @param {HTMLElement} globalMenuSp メニューの要素
+ */
+const closeMenu = (hamburger, globalMenuSp) => {
+  const ulElement = globalMenuSp.firstElementChild;
+  const liElements = ulElement.children;
+
+  Array.prototype.forEach.call(liElements, function (item) {
+    item.addEventListener('click', function () {
+      hamburger.classList.toggle('active');
+
+      if (hamburger.classList.contains('active')) {
+        globalMenuSp.classList.add('active');
+      } else {
+        globalMenuSp.classList.remove('active');
+      }
+    });
+  });
+};
+
+/**
+ * ハンバーガーメニュー。
+ * @return {boolean} ハンバーガーメニューが、設置出来たらfalseを返す
+ */
+export function hamburger() {
+  const hamburger = document.querySelector('.hamburger');
+  const globalMenuSp = document.querySelector('.globalMenuSp');
+
+  menuDisplay(hamburger, globalMenuSp);
+
+  closeMenu(hamburger, globalMenuSp);
+
+  return false;
 }
