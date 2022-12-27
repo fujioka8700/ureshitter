@@ -1,13 +1,13 @@
 import './bootstrap';
 
-import { DateTime } from 'luxon';
-window.DateTime = DateTime;
-
 import { createApp } from 'vue';
 import App from './App.vue';
-import router from './router/index.js';
+import router from './router';
 
 const app = createApp(App);
 
 app.use(router);
 app.mount('#app');
+
+import { hamburger } from './util';
+hamburger();
