@@ -53,7 +53,18 @@
 </template>
 
 <script>
+import { useStorePagination } from '../../stores/pagination';
+import { storeToRefs } from 'pinia';
+
 export default {
+  setup() {
+    const pagination = useStorePagination();
+
+    const { dispPage } = storeToRefs(pagination);
+    const { changeStorePage } = pagination;
+
+    return { dispPage, changeStorePage };
+  },
   data() {
     return {
       messages: [],
@@ -66,6 +77,10 @@ export default {
   },
   emits: ['someMessages'],
   created() {
+    // DOM作成前に以前、表示していた、
+    // メッセージ一覧のページを取得する。
+    this.current_page = this.dispPage;
+
     this.getMessages();
   },
   computed: {
@@ -123,6 +138,10 @@ export default {
       this.current_page = messages.current_page;
       this.last_page = messages.last_page;
       this.messages = messages.data;
+
+      // ページネーションのページ数を、アプリ全体で管理するため、
+      // pagination の store にページ数を保存する。
+      this.changeStorePage(this.current_page);
 
       this.$emit('someMessages', this.messages);
 
