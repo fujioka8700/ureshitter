@@ -1,6 +1,7 @@
 <script setup>
 import HamburgerMenu from '../modules/HamburgerMenu.vue';
 import logo from '../../../images/logo.svg';
+import BoxArrowUpRight from '../../../images/box-arrow-up-right.svg';
 </script>
 
 <template>
@@ -31,6 +32,11 @@ import logo from '../../../images/logo.svg';
                   target="_blank"
                 >
                   twitter
+                  <img
+                    :src="BoxArrowUpRight"
+                    class="box-arrow-up-right"
+                    alt="別ウインドウで開きます"
+                  />
                 </a>
               </li>
               <li class="nav-item">
@@ -40,6 +46,11 @@ import logo from '../../../images/logo.svg';
                   target="_blank"
                 >
                   GitHub
+                  <img
+                    :src="BoxArrowUpRight"
+                    class="box-arrow-up-right"
+                    alt="別ウインドウで開きます"
+                  />
                 </a>
               </li>
             </ul>
