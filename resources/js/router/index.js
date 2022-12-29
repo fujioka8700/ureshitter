@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { useStorePagination } from '../stores/pagination';
 import TheHome from '../components/pages/TheHome.vue';
 import TheAbout from '../components/pages/TheAbout.vue';
 import TheSuccess from '../components/pages/TheSuccess.vue';
@@ -10,6 +11,18 @@ const routes = [
     path: '/',
     name: 'home',
     component: TheHome,
+    beforeEnter: (to, from, next) => {
+      // メッセージ投稿後、自身の書き込みが、
+      // 確認出来るように1ページ目に遷移する。
+      if (from.fullPath.match('/success')) {
+        const pagination = useStorePagination();
+        const { changeStorePage } = pagination;
+
+        changeStorePage(1);
+      }
+
+      next();
+    },
   },
   {
     path: '/about',
@@ -28,7 +41,7 @@ const routes = [
     props: true,
   },
   {
-    path: '/:catchAll(.*)',
+    path: '/:pathMatch(.*)*',
     component: NotFound,
   },
 ];
