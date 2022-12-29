@@ -36,7 +36,7 @@
 import LittleHappy from '../../../images/little-happy.svg';
 import UsuallyHappy from '../../../images/usually-happy.svg';
 import VeryHappy from '../../../images/very-happy.svg';
-import { EMOTION_MESSAGE, EMOTION_BGCOLOR } from '../../config';
+import { EMOTION_MESSAGE, EMOTION_BGCOLOR, NOTFOUND } from '../../config';
 </script>
 
 <script>
@@ -93,7 +93,15 @@ export default {
   },
   methods: {
     async getMessage() {
-      const result = await axios.get(`/api/messages/${this.id}`);
+      const result = await axios.get(`/api/messages/${this.id}`).catch((response) => {
+        const error = response.response;
+
+        // リクエストされたメッセージが無ければ、Not Found へ遷移する
+        if (error.status === NOTFOUND) {
+          console.log(this.$router.push({ name: 'notfound' }));
+        }
+      });
+
       const message = result.data;
 
       this.name = message.name;
