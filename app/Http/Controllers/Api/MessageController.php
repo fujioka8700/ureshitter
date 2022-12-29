@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 
 class MessageController extends Controller
 {
+  const HEADERS = ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'];
+
   /**
    * Display a listing of the resource.
    *
@@ -22,7 +24,7 @@ class MessageController extends Controller
     return response()->json(
       $messages,
       200,
-      ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],
+      self::HEADERS,
       JSON_UNESCAPED_UNICODE
     );
   }
@@ -55,7 +57,7 @@ class MessageController extends Controller
     return response()->json(
       $message,
       201,
-      ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],
+      self::HEADERS,
       JSON_UNESCAPED_UNICODE
     );
   }
@@ -70,10 +72,23 @@ class MessageController extends Controller
   {
     $message = Message::find($id);
 
+    // リクエストされたパスパラメーターで
+    // メッセージが無ければ、メッセージは無い事を返す。
+    if (is_null($message)) {
+      $errorMessage = ['error' => 'メッセージはありません。'];
+
+      return response()->json(
+        $errorMessage,
+        404,
+        self::HEADERS,
+        JSON_UNESCAPED_UNICODE
+      );
+    }
+
     return response()->json(
       $message,
       200,
-      ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],
+      self::HEADERS,
       JSON_UNESCAPED_UNICODE
     );
   }
@@ -115,7 +130,7 @@ class MessageController extends Controller
     return response()->json(
       $deletedCount,
       200,
-      ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],
+      self::HEADERS,
       JSON_UNESCAPED_UNICODE
     );
   }

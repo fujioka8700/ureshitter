@@ -189,6 +189,22 @@ class MessageControllerTest extends TestCase
   }
 
   /**
+   * 存在しないメッセージ1つを見ようとしたとき、Jsonにエラーを入れて返す
+   *
+   * @return void
+   */
+  public function test_error_with_no_single_message()
+  {
+    $pathParameter = $this->faker()->randomNumber(8, true);
+
+    $response = $this->getJson('api/messages/' . $pathParameter);
+
+    $response->assertStatus(404)->assertJson([
+      'error' => 'メッセージはありません。',
+    ]);
+  }
+
+  /**
    * メッセージ1つを削除する(パスワードが一致しており、削除が成功した場合)
    *
    * @return void
