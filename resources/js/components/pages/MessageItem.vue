@@ -82,6 +82,8 @@ export default {
     },
   },
   created() {
+    this.receiveNumbersOnly(this.id);
+
     this.getMessage().then((result) => {
       this.iconType();
 
@@ -98,7 +100,7 @@ export default {
 
         // リクエストされたメッセージが無ければ、Not Found へ遷移する
         if (error.status === NOTFOUND) {
-          console.log(this.$router.push({ name: 'notfound' }));
+          this.$router.push({ name: 'notfound' });
         }
       });
 
@@ -157,6 +159,19 @@ export default {
       }
 
       return true;
+    },
+    /**
+     * パスパラメーターは数字のみ受け取る。
+     * 数字以外が混ざっていれば、Not Found へ遷移する。
+     * @param {number} id メッセージID
+     */
+    receiveNumbersOnly(id) {
+      const pattern = /^[0-9]*$/;
+      const messageId = id.match(pattern);
+
+      if (messageId === null) {
+        this.$router.push({ name: 'notfound' });
+      }
     },
   },
 };
