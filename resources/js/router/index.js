@@ -13,7 +13,7 @@ const routes = [
     component: TheHome,
     beforeEnter: (to, from, next) => {
       // メッセージ投稿後、自身の書き込みが、
-      // 確認出来るように1ページ目に遷移する。
+      // 確認出来るように1ページ目に遷移します。
       if (from.fullPath.match('/success')) {
         const pagination = useStorePagination();
         const { changeStorePage } = pagination;
