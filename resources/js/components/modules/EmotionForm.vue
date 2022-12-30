@@ -119,7 +119,15 @@ export default {
     };
   },
   methods: {
+    /**
+     * メッセージを投稿します。
+     * @return {boolean}
+     */
     async postMessage() {
+      /**
+       * メッセージ投稿成功時、メッセージを格納します。
+       * @type {Object}
+       */
       let post_success_content;
 
       const response = await axios
@@ -135,9 +143,13 @@ export default {
           return false;
         })
         .catch(function (error) {
+          /**
+           * バリデーションエラー内容を格納します。
+           * @type {Object}
+           */
           let errors = {};
 
-          // Laravelから返ってきたバリデーションエラー内容を取り出す
+          // Laravelから返ってきたバリデーションエラー内容を取り出します。
           for (let key in error.response.data.errors) {
             errors[key] = error.response.data.errors[key][0];
           }
@@ -151,16 +163,29 @@ export default {
 
       return false;
     },
-    showValidationErrors(response) {
-      if (Object.keys(response).length !== 0) {
-        this.error_messages = response;
+    /**
+     * メッセージ投稿後のバリデーションエラーを表示します。
+     * @param {Object} errors メッセージ投稿時のバリデーションエラーです。
+     */
+    showValidationErrors(errors) {
+      if (Object.keys(errors).length !== 0) {
+        this.error_messages = errors;
       }
     },
-    checkForValidationErrors(response, content) {
-      if (Object.keys(response).length === 0) {
+    /**
+     * バリデーションエラーの有無をチェックします。
+     * @param {Object} errors メッセージ投稿時のバリデーションエラーです。
+     * @param {Object} content メッセージ投稿成功時のメッセージです。
+     */
+    checkForValidationErrors(errors, content) {
+      if (Object.keys(errors).length === 0) {
         this.goToPostSuccessPage(content);
       }
     },
+    /**
+     * 投稿成功ページへ遷移します。
+     * @param {Object} content メッセージ投稿成功時のメッセージです。
+     */
     goToPostSuccessPage(content) {
       this.$router.push({
         name: 'success',
