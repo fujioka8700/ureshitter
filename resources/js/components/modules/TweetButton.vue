@@ -30,6 +30,9 @@ export default {
     this.twitterExternalScript();
   },
   methods: {
+    /**
+     * twitter社様が公開している、widgets.jsを実行します。
+     */
     twitterExternalScript() {
       let scriptEl = document.createElement('script');
 

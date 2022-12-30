@@ -48,16 +48,24 @@ export default {
     };
   },
   created() {
-    this.goToNotfoudInsteadOfSuccess();
+    this.goToNotfound();
 
     this.savePostData();
 
     this.iconType();
   },
   computed: {
+    /**
+     * ツイートする文章を作成します。
+     * @return {string}
+     */
     twitterText() {
       return `【${this.emotionMessage}】${this.message} ${this.name}`;
     },
+    /**
+     * TOPページのアドレスです。
+     * @return {string}
+     */
     originURL() {
       const uri = new URL(window.location.href);
 
@@ -65,6 +73,9 @@ export default {
     },
   },
   methods: {
+    /**
+     * 表示する表情アイコン、背景色、感情メッセージを決定します。
+     */
     iconType() {
       switch (this.emotion) {
         case 0:
@@ -85,16 +96,20 @@ export default {
         default:
           break;
       }
-
-      return false;
     },
-    goToNotfoudInsteadOfSuccess() {
+    /**
+     * クエリパラメーターが不正なら、NotFoundへ遷移します。
+     */
+    goToNotfound() {
       const status = parseInt(this.$route.query.status);
 
       if (status !== CREATED) {
         this.$router.push({ path: 'notfound' });
       }
     },
+    /**
+     * 投稿が成功したメッセージを表示します。
+     */
     savePostData() {
       this.name = this.$route.query.name;
       this.message = this.$route.query.message;

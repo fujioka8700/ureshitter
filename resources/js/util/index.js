@@ -1,7 +1,7 @@
 /**
- * クッキーの値を取得する
- * @param {String} searchKey 検索するキー
- * @returns {String} キーに対応する値
+ * クッキーの値を取得します。
+ * @param {String} searchKey 検索するキーです。
+ * @returns {String} キーに対応する値です。
  */
 export function getCookieValue(searchKey) {
   if (typeof searchKey === 'undefined') {
@@ -21,9 +21,9 @@ export function getCookieValue(searchKey) {
 }
 
 /**
- * ハンバーガーアイコンをタッチすると、メニューを表示する
- * @param {HTMLElement} hamburger ハンバーガーアイコンの要素
- * @param {HTMLElement} globalMenuSp メニューの要素
+ * ハンバーガーアイコンをタッチすると、メニューを表示します。
+ * @param {HTMLElement} hamburger ハンバーガーアイコンの要素です。
+ * @param {HTMLElement} globalMenuSp メニューの要素です。
  */
 const menuDisplay = (hamburger, globalMenuSp) => {
   hamburger.addEventListener('click', function () {
@@ -38,9 +38,9 @@ const menuDisplay = (hamburger, globalMenuSp) => {
 };
 
 /**
- * メニュー項目のどれかタッチすると、メニューを閉じる
- * @param {HTMLElement} hamburger ハンバーガーアイコンの要素
- * @param {HTMLElement} globalMenuSp メニューの要素
+ * メニュー項目のどれかタッチすると、メニューを閉じます。
+ * @param {HTMLElement} hamburger ハンバーガーアイコンの要素です。
+ * @param {HTMLElement} globalMenuSp メニューの要素です。
  */
 const closeMenu = (hamburger, globalMenuSp) => {
   const ulElement = globalMenuSp.firstElementChild;
@@ -60,9 +60,9 @@ const closeMenu = (hamburger, globalMenuSp) => {
 };
 
 /**
- * 画面全体どこをタッチしても、メニューを閉じる
- * @param {HTMLElement} hamburger ハンバーガーアイコンの要素
- * @param {HTMLElement} globalMenuSp メニューの要素
+ * 画面全体どこをタッチしても、メニューを閉じます。
+ * @param {HTMLElement} hamburger ハンバーガーアイコンの要素です。
+ * @param {HTMLElement} globalMenuSp メニューの要素です。
  */
 const closeMenuByTouch = (hamburger, globalMenuSp) => {
   const appMainElement = document.querySelector('.app-main');
@@ -79,8 +79,7 @@ const closeMenuByTouch = (hamburger, globalMenuSp) => {
 };
 
 /**
- * ハンバーガーメニュー。
- * @return {boolean} ハンバーガーメニューが、設置出来たらfalseを返す
+ * ハンバーガーメニューを作成します。
  */
 export function hamburger() {
   const hamburger = document.querySelector('.hamburger');
@@ -91,6 +90,4 @@ export function hamburger() {
   closeMenu(hamburger, globalMenuSp);
 
   closeMenuByTouch(hamburger, globalMenuSp);
-
-  return false;
 }
