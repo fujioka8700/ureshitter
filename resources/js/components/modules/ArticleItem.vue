@@ -74,13 +74,24 @@ export default {
     this.iconType();
   },
   computed: {
+    /**
+     * メッセージを投稿した時間です。
+     * @return {string} 「年月日 時分」に変換しています。
+     */
     writingTime() {
+      /**
+       * Luxonを使いJavaScriptで使える、ノーマルな日付オブジェクトに変換しています。
+       * @type {Date}
+       */
       const writingTime = DateTime.fromJSDate(new Date(this.created_at));
 
       return writingTime.toFormat('yyyy年MM月dd日 HH:mm');
     },
   },
   methods: {
+    /**
+     * 表示する表情アイコンを決定します。
+     */
     iconType() {
       switch (this.emotion) {
         case 0:
@@ -98,15 +109,22 @@ export default {
         default:
           break;
       }
-
-      return false;
     },
+    /**
+     * メッセージの上にポインタがホバー時、色を薄くします。
+     */
     mouseOverAction() {
       this.messageMouseOver = true;
     },
+    /**
+     * メッセージの上からポインタが離れた時、色を元に戻します。
+     */
     mouseLeaveAction() {
       this.messageMouseOver = false;
     },
+    /**
+     * メッセージをクリックした時、メッセージ1つのページへ遷移します。
+     */
     goToMessage() {
       this.$router.push({ name: 'message', params: { id: this.id } });
     },

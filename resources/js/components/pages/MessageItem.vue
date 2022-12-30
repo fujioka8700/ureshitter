@@ -36,7 +36,7 @@
 import LittleHappy from '../../../images/little-happy.svg';
 import UsuallyHappy from '../../../images/usually-happy.svg';
 import VeryHappy from '../../../images/very-happy.svg';
-import { EMOTION_MESSAGE, EMOTION_BGCOLOR } from '../../config';
+import { EMOTION_MESSAGE, EMOTION_BGCOLOR, NOTFOUND } from '../../config';
 </script>
 
 <script>
@@ -69,40 +69,66 @@ export default {
     };
   },
   computed: {
+    /**
+     * メッセージを投稿した時間です。
+     * @return {string} 「年月日 時分」に変換しています。
+     */
     writingTime() {
       const writingTime = DateTime.fromJSDate(new Date(this.created_at));
 
       return writingTime.toFormat('yyyy年MM月dd日 HH:mm');
     },
+    /**
+     * ツイートする文章を作成します。
+     * @return {string}
+     */
     twitterText() {
       return `【${this.emotionMessage}】${this.message} ${this.name}`;
     },
+    /**
+     * 表示しているページのアドレスです。
+     * @return {string}
+     */
     originURL() {
       return window.location.href;
     },
   },
   created() {
+    this.receiveNumbersOnly(this.id);
+
     this.getMessage().then((result) => {
       this.iconType();
 
       // 非同期の処理が完了し、
       // ツイートボタンのコンポーネントに渡すデータが揃ってから、
-      // ツイートボタンを表示するようにしている。
+      // ツイートボタンを表示するようにしています。
       this.ready = true;
     });
   },
   methods: {
+    /**
+     * メッセージを1つ取得します。
+     */
     async getMessage() {
-      const result = await axios.get(`/api/messages/${this.id}`);
+      const result = await axios.get(`/api/messages/${this.id}`).catch((response) => {
+        const error = response.response;
+
+        // リクエストされたメッセージが無ければ、NotFound へ遷移します。
+        if (error.status === NOTFOUND) {
+          this.$router.push({ name: 'notfound' });
+        }
+      });
+
       const message = result.data;
 
       this.name = message.name;
       this.message = message.message;
       this.emotion = message.emotion;
       this.created_at = message.created_at;
-
-      return false;
     },
+    /**
+     * 表示する表情アイコン、背景色、感情メッセージを決定します。
+     */
     iconType() {
       switch (this.emotion) {
         case 0:
@@ -123,9 +149,10 @@ export default {
         default:
           break;
       }
-
-      return false;
     },
+    /**
+     * メッセージを削除するか、確認ダイアログを表示します。
+     */
     async deleteMessage() {
       const inputPassword = window.prompt('削除キーを入力してください。', '');
 
@@ -137,18 +164,32 @@ export default {
 
       this.transitionIfDeleted(response);
     },
-    transitionIfDeleted(confirmResponse) {
-      if (confirmResponse.data.deleteCount === 0) {
+    /**
+     * メッセージが削除できていれば、TOP画面へ遷移します。
+     * @param {Object} record 削除できたレコード数です。
+     */
+    transitionIfDeleted(record) {
+      if (record.data.deleteCount === 0) {
         alert('削除できませんでした。');
-        return false;
       }
 
-      if (confirmResponse.data.deleteCount === 1) {
+      if (record.data.deleteCount === 1) {
         alert('削除しました。');
         this.$router.push({ name: 'home' });
       }
+    },
+    /**
+     * パスパラメーターは数字のみ受け取ります。
+     * 数字以外が混ざっていれば、NotFound へ遷移します。
+     * @param {number} id メッセージIDです。
+     */
+    receiveNumbersOnly(id) {
+      const pattern = /^[0-9]*$/;
+      const messageId = id.match(pattern);
 
-      return true;
+      if (messageId === null) {
+        this.$router.push({ name: 'notfound' });
+      }
     },
   },
 };

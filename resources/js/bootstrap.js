@@ -11,11 +11,11 @@ import { getCookieValue } from './util';
 import axios from 'axios';
 window.axios = axios;
 
-// Ajaxリクエストであることを示すヘッダーを付与する
+// Ajaxリクエストであることを示すヘッダーを付与します。
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 window.axios.interceptors.request.use((config) => {
-  // クッキーからトークンを取り出してヘッダーに添付する
+  // クッキーからトークンを取り出してヘッダーに添付します。
   config.headers['X-XSRF-TOKEN'] = getCookieValue('XSRF-TOKEN');
 
   return config;
@@ -43,14 +43,15 @@ window.axios.interceptors.request.use((config) => {
 // });
 
 /**
- * Bootstrap5 のリファレンスはこちら。
- * https://bootstrap-guide.com/
+ * Bootstrap5 のリファレンスはこちらです。
+ * @see https://bootstrap-guide.com/
  */
 import * as bootstrap from 'bootstrap';
 
 /**
- * 日付オブジェクトを取得後、日付の加工にluxonを使用。
- * (jsonにはISO8601形式で送られてくる)
+ * 日付オブジェクトを取得後、日付の加工にluxonを使用します。
+ * (jsonにはISO8601形式で送られてきます。)
+ * @see https://moment.github.io/luxon/
  */
 import { DateTime } from 'luxon';
 window.DateTime = DateTime;
