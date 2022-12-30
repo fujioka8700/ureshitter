@@ -58,8 +58,9 @@ import { storeToRefs } from 'pinia';
 
 export default {
   setup() {
+    // ページネーションのページ数の管理に、
+    // piniaのpaginationストアを使用します。
     const pagination = useStorePagination();
-
     const { dispPage } = storeToRefs(pagination);
     const { changeStorePage } = pagination;
 
@@ -77,13 +78,16 @@ export default {
   },
   emits: ['someMessages'],
   created() {
-    // DOM作成前に以前、表示していた、
-    // メッセージ一覧のページを取得する。
+    // DOM作成前に、以前表示していた、
+    // メッセージ一覧のページを取得します。
     this.current_page = this.dispPage;
 
     this.getMessages();
   },
   computed: {
+    /**
+     * @return {Array}
+     */
     frontPageRange() {
       if (!this.sizeCheck) {
         this.front_dot = false;
@@ -93,6 +97,9 @@ export default {
 
       return this.calRange(1, 2);
     },
+    /**
+     * @return {Array}
+     */
     middlePageRange() {
       let start = '';
       let end = '';
@@ -117,11 +124,17 @@ export default {
 
       return this.calRange(start, end);
     },
+    /**
+     * @return {Array}
+     */
     endPageRange() {
       if (!this.sizeCheck) return [];
 
       return this.calRange(this.last_page - 1, this.last_page);
     },
+    /**
+     * @return {boolean}
+     */
     sizeCheck() {
       if (this.last_page <= this.range + 2) {
         return false;
@@ -131,6 +144,9 @@ export default {
     },
   },
   methods: {
+    /**
+     * 表示するメッセージたちを取得します。
+     */
     async getMessages() {
       const result = await axios.get(`/api/messages?page=${this.current_page}`);
       const messages = result.data;
@@ -140,13 +156,16 @@ export default {
       this.messages = messages.data;
 
       // ページネーションのページ数を、アプリ全体で管理するため、
-      // pagination の store にページ数を保存する。
+      // pagination の store にページ数を保存します。
       this.changeStorePage(this.current_page);
 
       this.$emit('someMessages', this.messages);
-
-      return false;
     },
+    /**
+     * @param {number} start
+     * @param {number} end
+     * @return {Array}
+     */
     calRange(start, end) {
       const range = [];
 
@@ -156,14 +175,21 @@ export default {
 
       return range;
     },
+    /**
+     * クリックしたボタンのページ数に変更します。
+     * @param {number} page クリックしたボタンの数値です。
+     */
     changePage(page) {
       if (page > 0 && page <= this.last_page) {
         this.current_page = page;
         this.getMessages();
       }
-
-      return false;
     },
+    /**
+     * 表示しているページをチェックします。
+     * @param {number} page 確認するページ数です。
+     * @return {boolean} trueならCSSにactiveを追加します。
+     */
     isCurrent(page) {
       return page === this.current_page;
     },
