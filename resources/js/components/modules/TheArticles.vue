@@ -37,10 +37,12 @@ export default {
     };
   },
   methods: {
+    /**
+     * ページネーションコンポーネントから、emit されたメッセージを一覧表示します。
+     * @param {Object} messages 表示するメッセージたちです。
+     */
     messageUpdate(messages) {
       this.messages = messages;
-
-      return false;
     },
   },
 };
