@@ -121,7 +121,6 @@ export default {
   methods: {
     /**
      * メッセージを投稿します。
-     * @return {boolean}
      */
     async postMessage() {
       /**
@@ -160,8 +159,6 @@ export default {
       this.showValidationErrors(response);
 
       this.checkForValidationErrors(response, post_success_content);
-
-      return false;
     },
     /**
      * メッセージ投稿後のバリデーションエラーを表示します。
