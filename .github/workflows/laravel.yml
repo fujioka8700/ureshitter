@@ -22,9 +22,6 @@ jobs:
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
-      - name: Composer self-update
-        run: composer self-update
-
       - name: cache vendor
         id: cache
         uses: actions/cache@v3
