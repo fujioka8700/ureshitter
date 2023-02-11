@@ -1,0 +1,32 @@
+name: CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Install SSH Key for Deploy
+        uses: appleboy/ssh-action@master
+        env:
+          PW: ${{ secrets.PW }}
+          CD: ${{ secrets.CD }}
+        with:
+          key: ${{ secrets.SK }}
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          port: ${{ secrets.SSH_PORT }}
+          envs: PW,CD
+          script: |
+            cd $CD
+            git pull origin main
+            composer install -n --no-dev --prefer-dist
+            echo $PW | sudo -S npm ci
+            echo $PW | sudo -S npm run build
+            php artisan migrate --force
+            php artisan config:cache

@@ -1,14 +1,11 @@
-name: Laravel
+name: CI
 
 on:
   push:
-    branches:
-      - 'fix/**'
-      - 'feature/**'
-  pull_request:
-    branches:
+    paths-ignore:
+      - '*.md'
+    branches-ignore:
       - main
-      - develop
 
 jobs:
   laravel-tests:
