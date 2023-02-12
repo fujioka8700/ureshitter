@@ -9,7 +9,7 @@
 
 Urehitter
 
-https://ureshitter.site/
+https://ureshitter.site
 
 # 背景
 
