@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-  @includeWhen(env('GA_ENABLE'), 'ga')
+  @includeWhen(config('google.ga_enable'), 'ga')
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
