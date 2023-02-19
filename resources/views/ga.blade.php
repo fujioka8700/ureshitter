@@ -5,5 +5,5 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', {{ config('google.ga_measurement_id') }});
+  gtag('config', '{{ config('google.ga_measurement_id') }}');
 </script>
